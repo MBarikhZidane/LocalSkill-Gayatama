@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>[hidden]{display:none!important}</style>
+  <meta name="description" content="Find, book, and share trusted student skills around your campus."><title>Create your account | LOCALSKILL</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script defer src="assets/js/app.js"></script>
+  <script defer src="assets/js/google-auth.js"></script>
+</head>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800 antialiased">
+  <a href="#content" class="sr-only focus:not-sr-only focus:p-4">Skip to content</a>
+  <header class="border-b border-slate-200 bg-white"><nav class="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-4 py-4" aria-label="Main navigation">
+    <a href="index.html" class="mr-auto text-xl font-extrabold tracking-tight">LOCAL<span class="text-emerald-600">SKILL</span></a><a href="explore.html" class="text-sm font-semibold">Explore</a><a href="layout-dashboard.html" class="text-sm font-semibold">Workspace</a><a href="login.html" class="btn btn-sm bg-emerald-600 text-white hover:bg-emerald-700">Log in</a>
+  </nav></header>
+  <main id="content" class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 mx-auto max-w-md"><p class="text-sm font-semibold text-emerald-700">ONE CAMPUS. MORE POSSIBILITIES.</p><h1 class="mt-3 text-3xl font-bold">Create your account</h1><p class="mb-6 mt-3 text-slate-600">One account to book skills and offer your own.</p>
+      <div id="google-signin" class="flex min-h-11 justify-center"><button type="button" disabled class="btn w-full border-slate-300 bg-white text-slate-700">Continue with Google</button></div><p id="google-status" role="status" class="mt-3 text-sm text-slate-600">Google sign-in is not connected in this preview.</p>
+      <div class="divider text-sm text-slate-500">or use email</div>
+      <form action="/auth/register" method="post" data-demo class="grid gap-4">
+        <label class="grid gap-2 text-sm font-semibold">Full name<input name="name" autocomplete="name" maxlength="100" required class="input input-bordered"></label>
+          <label class="grid gap-2 text-sm font-semibold">University<input name="university" autocomplete="organization" maxlength="150" required class="input input-bordered"></label>
+        <label class="grid gap-2 text-sm font-semibold">Student email<input type="email" name="email" autocomplete="email" required class="input input-bordered"></label>
+        <label class="grid gap-2 text-sm font-semibold">Password<input type="password" name="password" autocomplete="new-password" minlength="8" required class="input input-bordered"></label>
+        <p class="text-sm text-slate-600">Form preview only. Do not enter a real password.</p><button disabled class="btn border-0 bg-emerald-600 text-white hover:bg-emerald-700">Preview registration</button><p data-feedback role="status" class="text-sm text-emerald-800"></p>
+      </form><p class="mt-6 text-sm">Already a member? <a href="login.html" class="font-semibold text-emerald-700">Log in</a></p><a href="layout-dashboard.html" class="mt-4 inline-block text-sm underline">View demo workspace</a>
+    </section>
+    <noscript><p class="mt-6 rounded-xl bg-amber-50 p-4 text-amber-900">Enable JavaScript to filter sample listings and preview forms. No information is sent in this demo.</p></noscript>
+  </main>
+  <footer class="border-t border-slate-200 bg-white"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 px-4 py-6 text-sm text-slate-600"><span>&copy; 2026 LOCALSKILL &middot; Built for campus life.</span><a href="index.html#how">Find &rarr; Match &rarr; Book &rarr; Complete &rarr; Review</a></div></footer>
+</body>
+</html>
