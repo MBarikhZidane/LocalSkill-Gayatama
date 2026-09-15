@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>[hidden]{display:none!important}textarea,p,h2,h3{overflow-wrap:anywhere}progress{accent-color:#059669}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #059669;outline-offset:3px}</style>
+  <meta name="description" content="Find, book, and share trusted student skills around your campus."><title>Reviews | LOCALSKILL</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script defer src="assets/js/catalog.js"></script><script defer src="assets/js/app.js"></script><script defer src="assets/js/workspace-data.js"></script><script defer src="assets/js/workspace.js"></script>
+</head>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800 antialiased">
+  <a href="#content" class="sr-only focus:not-sr-only focus:p-4">Skip to content</a>
+  <header class="border-b border-slate-200 bg-white"><nav class="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-4 py-4" aria-label="Main navigation">
+    <a href="index.html" class="mr-auto text-xl font-extrabold tracking-tight">LOCAL<span class="text-emerald-600">SKILL</span></a><a href="explore.html" class="text-sm font-semibold">Explore</a><a href="layout-dashboard.html" class="text-sm font-semibold">Workspace</a><a href="login.html" class="btn btn-sm bg-emerald-600 text-white hover:bg-emerald-700">Log in</a>
+  </nav></header>
+  <main id="content" class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">
+    <p class="text-xs font-bold uppercase tracking-widest text-emerald-700">Barikh's workspace &middot; Demo account</p>
+    <h1 class="mt-3 text-3xl font-bold">Reviews</h1><p class="mt-3 max-w-3xl leading-7 text-slate-600">Review a provider after your purchase is completed. See the feedback you have written and received.</p>
+<nav aria-label="Workspace navigation" class="my-6 flex flex-wrap gap-2">
+      <a href="layout-dashboard.html" class="btn btn-sm">Overview</a><a href="orders.html" class="btn btn-sm" data-workspace-nav="orders">My Orders</a><a href="messages.html" class="btn btn-sm" data-workspace-nav="messages">Messages</a><a href="reviews.html" class="btn btn-sm" data-workspace-nav="reviews">Reviews</a><a href="my-skill-profile.html" class="btn btn-sm" data-workspace-nav="my-skill-profile">My Skill Profile</a>
+    </nav><p id="storage-notice" role="status" class="mb-6 rounded-xl bg-emerald-50 p-4 text-sm leading-6 text-emerald-900">Demo only. Messages, reviews, and profile edits stay in this browser. Nothing is sent to another person or published.</p>
+    <noscript><p class="mb-6 rounded-xl bg-amber-50 p-4 text-amber-900">Enable JavaScript to use this demo. Editing and submission are disabled without it.</p></noscript>
+
+    <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <section class="min-w-0 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8" aria-labelledby="write-review-title"><h2 id="write-review-title" class="text-xl font-bold">Write a review</h2><p class="mt-2 text-sm leading-6 text-slate-600">One review per completed purchase. In-progress orders cannot be reviewed.</p>
+        <form id="review-form" class="mt-5 grid gap-5"><label class="grid gap-2 text-sm font-semibold">Completed purchase<select name="order_id" required class="select select-bordered w-full"><option value="">Choose an eligible order</option></select></label>
+          <fieldset><legend class="text-sm font-semibold">Your rating</legend><div class="mt-3 flex flex-wrap gap-2"><label class="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm"><input type="radio" name="rating" value="1" required class="radio radio-sm"><span>1 &#9733;</span></label><label class="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm"><input type="radio" name="rating" value="2" required class="radio radio-sm"><span>2 &#9733;</span></label><label class="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm"><input type="radio" name="rating" value="3" required class="radio radio-sm"><span>3 &#9733;</span></label><label class="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm"><input type="radio" name="rating" value="4" required class="radio radio-sm"><span>4 &#9733;</span></label><label class="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm"><input type="radio" name="rating" value="5" required class="radio radio-sm"><span>5 &#9733;</span></label></div><p class="mt-2 text-xs text-slate-500">1 = Poor &middot; 5 = Excellent</p></fieldset>
+          <label class="grid gap-2 text-sm font-semibold">Your experience<textarea name="review" required minlength="10" maxlength="1000" rows="5" class="textarea textarea-bordered w-full" placeholder="What went well? What could be improved? (10-1000 characters)"></textarea></label><button type="submit" disabled class="btn border-0 bg-emerald-600 text-white hover:bg-emerald-700">Save demo review</button><p id="review-feedback" role="status" class="text-sm leading-6 text-emerald-800"></p>
+        </form><p id="review-eligibility" role="status" class="mt-5 rounded-xl bg-slate-50 p-4 text-sm leading-6 text-slate-600"></p><a href="orders.html?view=buying" class="mt-4 inline-block text-sm font-semibold text-emerald-700 underline">See purchases and their status</a>
+      </section>
+      <div class="grid min-w-0 gap-6"><section class="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="written-title"><h2 id="written-title" class="text-xl font-bold">Reviews I've written</h2><div id="written-reviews" class="mt-5 grid gap-5"></div></section><section class="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="received-title"><h2 id="received-title" class="text-xl font-bold">Reviews I've received</h2><p class="mt-2 text-sm text-slate-500">From customers of services you provided &middot; Sample feedback</p><div id="received-reviews" class="mt-5 grid gap-5"></div></section></div>
+    </div>
+
+  </main>
+  <footer class="border-t border-slate-200 bg-white"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 px-4 py-6 text-sm text-slate-600"><span>&copy; 2026 LOCALSKILL &middot; Built for campus life.</span><a href="index.html#how">Find &rarr; Match &rarr; Book &rarr; Complete &rarr; Review</a></div></footer>
+</body>
+</html>

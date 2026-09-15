@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>[hidden]{display:none!important}</style>
+  <meta name="description" content="Find, book, and share trusted student skills around your campus."><title>Student profile | LOCALSKILL</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script defer src="assets/js/catalog.js"></script><script defer src="assets/js/app.js"></script>
+</head>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800 antialiased">
+  <a href="#content" class="sr-only focus:not-sr-only focus:p-4">Skip to content</a>
+  <header class="border-b border-slate-200 bg-white"><nav class="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-4 py-4" aria-label="Main navigation">
+    <a href="index.html" class="mr-auto text-xl font-extrabold tracking-tight">LOCAL<span class="text-emerald-600">SKILL</span></a><a href="explore.html" class="text-sm font-semibold">Explore</a><a href="layout-dashboard.html" class="text-sm font-semibold">Workspace</a><a href="login.html" class="btn btn-sm bg-emerald-600 text-white hover:bg-emerald-700">Log in</a>
+  </nav></header>
+  <main id="content" class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">
+    <a href="explore.html" class="text-sm font-semibold text-emerald-700">&larr; Explore student skills</a>
+    <div id="student-profile" class="mt-6 grid gap-6">
+      <section class="overflow-hidden rounded-2xl border border-slate-200 bg-white" aria-labelledby="profile-name">
+        <div class="bg-emerald-950 px-6 py-8 text-emerald-200 sm:px-8"><p class="text-xs font-bold uppercase tracking-widest">Student profile &middot; Sample data</p><p class="mt-3 text-2xl font-semibold text-white">Local talent. Real possibilities.</p></div>
+        <div class="grid gap-6 p-6 sm:p-8 md:grid-cols-[1fr_auto]">
+          <div class="flex items-start gap-4"><span id="profile-avatar" role="img" aria-label="Student avatar" class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-emerald-100 text-2xl font-bold text-emerald-900">BK</span><div><h1 id="profile-name" class="text-3xl font-bold">Barikh K.</h1><p id="profile-role" class="mt-1 text-lg text-slate-600">Web Developer</p><p id="profile-location" class="mt-3 text-sm text-slate-500">Design Faculty &middot; 0.8 km away</p></div></div>
+          <div class="flex flex-wrap items-center gap-6 md:text-right"><a href="#reviews" class="text-emerald-700"><strong id="profile-rating" class="text-2xl">&#9733; 4.9</strong><span class="block text-sm">Overall rating</span></a><div><strong id="profile-jobs" class="text-2xl">24</strong><p class="text-sm text-slate-600">Jobs Completed</p></div></div>
+          <p id="profile-bio" class="max-w-3xl leading-7 text-slate-600 md:col-span-2">I build clear, approachable websites and help campus teams turn their ideas into a visual direction. From a first mood board to a finished interface, I care about the details that make a project easy to use.</p>
+        </div>
+      </section>
+      <nav aria-label="Profile sections" class="flex flex-wrap gap-2"><a href="#skills" class="btn btn-sm">Skills</a><a href="#portfolio" class="btn btn-sm">Portfolio</a><a href="#reviews" class="btn btn-sm">Reviews</a><a href="#services" class="btn btn-sm">Services</a></nav>
+      <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <div class="grid min-w-0 gap-6">
+          <section id="skills" class="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="skills-title"><h2 id="skills-title" class="text-xl font-bold">Skills</h2><ul id="profile-skills" class="mt-4 flex flex-wrap gap-2"><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800"><span aria-hidden="true">&#10003; </span>Laravel</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800"><span aria-hidden="true">&#10003; </span>PHP</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800"><span aria-hidden="true">&#10003; </span>MySQL</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800"><span aria-hidden="true">&#10003; </span>Design</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800"><span aria-hidden="true">&#10003; </span>Visual direction</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800"><span aria-hidden="true">&#10003; </span>Mood boards</li></ul></section>
+          <section id="services" class="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="services-title"><h2 id="services-title" class="text-xl font-bold">Services</h2><p class="mt-2 text-sm text-slate-500">Choose a service to see its scope and request a booking.</p><div id="profile-services" class="mt-5 grid gap-4"><article class="border-t border-slate-200 pt-4"><h3 class="font-bold">Design consultation</h3><p class="mt-2 text-sm leading-6 text-slate-600">A one-hour design consultation with a mood board and visual direction for your campus project.</p><p class="mt-3 font-bold">Rp150.000 <span class="text-xs font-normal text-slate-500">/ package</span></p><a href="service.html?id=design-01" class="btn mt-4 w-full border-0 bg-emerald-600 text-white hover:bg-emerald-700">View service / Book</a></article></div></section>
+        </div>
+        <div class="grid min-w-0 gap-6">
+          <section id="portfolio" class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8" aria-labelledby="portfolio-title"><h2 id="portfolio-title" class="text-xl font-bold">Portfolio</h2><p class="mt-2 text-sm text-slate-500">Selected work &middot; Sample projects</p><div id="profile-portfolio" class="mt-5 grid gap-4 sm:grid-cols-2"><article class="overflow-hidden rounded-xl border border-slate-200">
+    <div class="flex h-28 items-center justify-center bg-emerald-50 text-emerald-700"><i data-lucide="panels-top-left" class="h-12 w-12" aria-hidden="true"></i><span class="sr-only">Sample project illustration</span></div>
+    <div class="p-4"><p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">Website concept</p><h3 class="mt-2 font-bold">Campus community website</h3><p class="mt-2 text-sm leading-6 text-slate-600">A clear homepage concept for a student community, with accessible navigation and a reusable visual system.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800">Laravel</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800">PHP</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800">MySQL</li></ul></div>
+  </article><article class="overflow-hidden rounded-xl border border-slate-200">
+    <div class="flex h-28 items-center justify-center bg-emerald-50 text-emerald-700"><i data-lucide="palette" class="h-12 w-12" aria-hidden="true"></i><span class="sr-only">Sample project illustration</span></div>
+    <div class="p-4"><p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">Mood board</p><h3 class="mt-2 font-bold">Student festival direction</h3><p class="mt-2 text-sm leading-6 text-slate-600">A coordinated palette, typography selection, and layout direction for a campus festival.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800">Design</li><li class="rounded-full bg-emerald-50 px-3 py-2 text-sm text-emerald-800">Visual direction</li></ul></div>
+  </article></div></section>
+          <section id="reviews" class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8" aria-labelledby="reviews-title"><h2 id="reviews-title" class="text-xl font-bold">Reviews</h2><p class="mt-2 text-sm text-slate-500">A selection of sample customer reviews. Overall rating covers all completed jobs.</p><div id="profile-reviews" class="mt-5 grid gap-5"><article class="border-t border-slate-200 pt-5">
+    <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold">Alya</h3><p class="text-sm font-semibold text-emerald-700" aria-label="5 out of 5 stars">&#9733; 5.0 / 5</p></div>
+    <time datetime="2026-08-21" class="mt-1 block text-xs text-slate-500">21 Aug 2026</time><p class="mt-3 text-sm leading-6 text-slate-600">The mood board made it much easier for our team to agree on a direction. Clear explanations throughout the session.</p>
+  </article><article class="border-t border-slate-200 pt-5">
+    <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold">Dimas</h3><p class="text-sm font-semibold text-emerald-700" aria-label="5 out of 5 stars">&#9733; 5.0 / 5</p></div>
+    <time datetime="2026-08-12" class="mt-1 block text-xs text-slate-500">12 Aug 2026</time><p class="mt-3 text-sm leading-6 text-slate-600">Helpful feedback on our layout and a practical set of next steps. The notes arrived on time.</p>
+  </article></div></section>
+        </div>
+      </div>
+    </div>
+    <p id="missing-profile" hidden class="py-16 text-xl">This student profile is unavailable. <a href="explore.html" class="underline">Explore other students</a>.</p>
+    <noscript><p class="mt-6 rounded-xl bg-amber-50 p-4 text-amber-900">Enable JavaScript to load the selected student. The default sample shown is Barikh K.</p></noscript>
+  </main>
+  <footer class="border-t border-slate-200 bg-white"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 px-4 py-6 text-sm text-slate-600"><span>&copy; 2026 LOCALSKILL &middot; Built for campus life.</span><a href="index.html#how">Find &rarr; Match &rarr; Book &rarr; Complete &rarr; Review</a></div></footer>
+</body>
+</html>

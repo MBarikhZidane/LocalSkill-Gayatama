@@ -26,7 +26,7 @@ The landing page introduces LOCALSKILL, shows sample skills and the six allowed 
 | Footer **Admin demo** | `layout-admin.html` | Sample moderation queue |
 | Mobile menu icon | Stays on `index.html`; opens/closes navigation | Explore skills, How it works, Our impact links |
 
-The hero skill cards, scrolling category ticker, statistics, and provider profile are display elements; they do not open detail pages. Category panels and explore links are the routes into discovery. The footer is shorter on narrow screens, so some desktop footer links are hidden.
+The hero skill cards, scrolling category ticker, and statistics are display elements. The name in the provider profile card opens `profile.html?id=barikh`. Category panels and explore links are the routes into discovery. The footer is shorter on narrow screens, so some desktop footer links are hidden.
 
 ### Photocopy explanation: `index.html#photocopy`
 
@@ -35,7 +35,7 @@ After the category panels, the **No printer at home? We can help.** section expl
 - Footer **About photocopy services** scrolls to this section.
 - **Find photocopy services** opens `explore.html?category=photocopy-services`, showing the photocopy sample card.
 - That card's title or **View skill** opens `service.html?id=photocopy-01`. The sample package is 20 A4 black-and-white printed sides for Rp10.000.
-- The customer enters a preferred date and brief, then clicks **Preview booking request**. Existing validation and inline demo feedback apply; no booking, document upload, file transfer, or pickup reservation occurs. Other quantities and colour printing need a provider agreement.
+- The customer enters a preferred date and brief, then clicks **Request / Book**. Existing validation and inline demo feedback apply; no booking, document upload, file transfer, or pickup reservation occurs. Other quantities and colour printing need a provider agreement.
 
 ## 2. Shared public navigation and `layout-public.html`
 
@@ -67,7 +67,7 @@ The initial screen has a search input, category select, **Find talent**, a resul
 
 1. Enter a phrase and/or choose a category, then click **Find talent** (or press Enter in search). The GET form reloads `explore.html` with `q` and `category`; selecting a category alone does not submit. Empty fields may remain in the URL.
 2. `assets/js/app.js` filters the sample cards and updates the count. Text search is case-insensitive and matches displayed card text. Text and category conditions must both match.
-3. Click either a card title or **View skill** to open that card's detail URL above. The rest of the card is not a link.
+3. Click either a card title or **View skill** to open that card's detail URL above. The provider name opens their student profile in `profile.html?id=<provider key>`.
 4. **Clear filters** returns to `explore.html` without query parameters.
 5. If nothing matches, the screen shows **No skills found** and **Show all skills**. That button returns to `explore.html`. Unknown category keys also produce no results.
 
@@ -75,15 +75,15 @@ Without JavaScript, the static six cards remain visible and a notice explains th
 
 ## 4. Match and request a booking: `service.html`
 
-The URL's `id` selects the title, package description, provider, location, rating, price, and hidden `service_id` booking field. With no ID, the page shows Design consultation. An unknown ID shows **This skill is unavailable** and a **Browse other skills** link to `explore.html`; the booking area is hidden.
+The URL's `id` selects the title, package description, provider, location, rating, price, skills, estimated completion, portfolio, reviews, and hidden `service_id` booking field. The provider name opens the matching student profile. All portfolio projects and reviews are labeled sample content. With no ID, the page shows Design consultation. An unknown ID shows **This skill is unavailable** and a **Browse other skills** link to `explore.html`; the booking area is hidden.
 
 | Action | Current UI result |
 | --- | --- |
 | **Back to skills** | Opens unfiltered `explore.html`; previous filters are not retained |
 | Select preferred date | Fills `scheduled_date`; dates before the local current date are disallowed |
 | Write your brief | Fills `brief`; 20–2000 characters are required |
-| **Preview booking request** with invalid fields | Browser validation identifies the invalid field; stays on this page |
-| **Preview booking request** with valid fields | Inline feedback says the preview was validated and nothing was sent or saved; stays on this page |
+| **Request / Book** with invalid fields | Browser validation identifies the invalid field; stays on this page |
+| **Request / Book** with valid fields | Inline feedback says the preview was validated and nothing was sent or saved; stays on this page |
 
 The timeline highlights **Match**. It does not advance on preview submission. There is no payment page, real booking, or login redirect in this static preview. Without JavaScript, the default Design consultation sample is shown with a notice, and preview submission is disabled.
 
@@ -121,14 +121,14 @@ The Google button is outside the email forms: users do not need to fill email/pa
 
 ## 6. Student workspace: `layout-dashboard.html`
 
-This screen combines sample booking statistics, **My orders**, **My services**, and **Offer a skill**. Jamie is sample data, not a signed-in identity. Header navigation remains public in the prototype.
+This screen combines sample booking statistics, **My orders**, **My services**, and **Offer a skill**. Barikh is the shared demo identity for the workspace, orders, messages, reviews, and My Skill Profile; this is not a signed-in session. Header navigation remains public in the prototype.
 
 | Control | Result |
 | --- | --- |
 | **Find a skill** | Opens `explore.html` |
-| **My orders** | Scrolls to `#orders`, showing a Design consultation booking awaiting provider confirmation |
-| Order **View skill** | Opens `service.html?id=design-01`; this is a service page, not a separate order-details screen |
-| **My services** | Scrolls to `#services`, showing Jamie's Presentation slides design listing |
+| **My Orders** | Opens `orders.html` with Buying selected; the overview cards link to Buying and Providing separately |
+| **Messages**, **Reviews**, **My Skill Profile** | Opens the corresponding workspace page |
+| **My services** | Scrolls to `#services`, showing Barikh's Design consultation listing |
 | **Offer a skill** | Scrolls to `#offer`, revealing the listing form |
 | **Preview listing** | Validates title, allowed category, campus zone, integer price (minimum Rp1.000, increments of Rp1.000), and description; shows inline demo feedback on success |
 
@@ -158,3 +158,22 @@ There is no separate moderation-result screen, provider notification, or automat
 | `.github/copilot-instructions.md` | Project stack, permitted categories, account model, and UI rules for future changes |
 
 All pages are standalone HTML, with Tailwind/DaisyUI CDNs on the connected pages and the preserved custom styling on the homepage. No build step is required. Internet is needed for CDN styles/icons; live Google access additionally requires the configured web origin and backend.
+
+## Student profiles: `profile.html`
+
+Provider keys are `barikh`, `aditya`, `jamie`, `nadia`, `clara`, and `rina`. With no ID, Barikh is shown. Unknown IDs show an unavailable message and a link back to Explore. Without JavaScript, the full default Barikh sample is visible with an explanatory notice.
+
+Each profile includes name, professional title, location, overall rating, completed jobs, bio, checked skills, portfolio project summaries, customer reviews, and available services. Section links scroll to Skills, Portfolio, Reviews, or Services. **View service / Book** opens the selected service detail and its booking form. Barikh has 24 total completed jobs, including 18 for the displayed Design consultation service.
+
+Entry points: provider names on Explore and Service Detail, Barikh's homepage profile card, and **View public profile** in the Barikh demo workspace. `assets/js/catalog.js` supplies shared sample data to the detail and profile pages; `assets/js/app.js` renders it and handles unavailable IDs. The existing six marketplace categories remain unchanged.
+
+## Orders, messages, reviews, and My Skill Profile
+
+The workspace now uses Barikh as one sample account that both buys and provides services. Its My Orders section links to `orders.html?view=buying` and `orders.html?view=providing`. It shows two active orders and 24 lifetime completed provider jobs; the five recent order records are only a sample of that history. The offered listing is Design consultation.
+
+- `orders.html`: Buying/Providing navigation, status filters, service and counterpart links, order progress, message links, and completed-purchase review links. Empty filters show a recovery link. Unknown view/status values fall back to Buying/all statuses.
+- `messages.html`: provider/customer conversations grouped by order. `?order=buy-001` selects an example. Unknown orders show an unavailable state. Sending adds only a local demo message, with no network delivery or simulated live reply. Whitespace-only messages are rejected; each conversation permits up to 100 local messages of 1000 characters each.
+- `reviews.html`: only unreviewed completed purchases are eligible. Rating is 1-5 and text is 10-1000 characters after trimming. Duplicate reviews and in-progress/providing/unknown orders cannot be submitted, even through a direct query parameter. Written and received reviews appear separately. Saving updates eligibility on the Orders page.
+- `my-skill-profile.html`: edit display name, title, bio, and self-assessed Laravel/PHP/MySQL percentages (0-100 in increments of 5). Separate read-only sample verification records never change when proficiency changes. Add or remove portfolio project summaries (up to 12). Drafts do not change the public sample profile.
+
+`assets/js/workspace-data.js` supplies shared sample orders and verification records. `assets/js/workspace.js` handles the UI and browser-only storage under `localskill.workspace.v1.*`. Browser storage failures show a notice and fall back to page memory. These four screens require JavaScript for interactions, and all write controls start disabled. Prefer serving the HTML over localhost so storage is shared consistently; file-URL storage behavior varies between browsers. Authentication, real messages, order completion, review authorization, publication, and skill verification still require backend implementation.

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>[hidden]{display:none!important}textarea,p,h2,h3{overflow-wrap:anywhere}progress{accent-color:#059669}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #059669;outline-offset:3px}</style>
+  <meta name="description" content="Find, book, and share trusted student skills around your campus."><title>Messages | LOCALSKILL</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script><script defer src="assets/js/catalog.js"></script><script defer src="assets/js/app.js"></script><script defer src="assets/js/workspace-data.js"></script><script defer src="assets/js/workspace.js"></script>
+</head>
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-800 antialiased">
+  <a href="#content" class="sr-only focus:not-sr-only focus:p-4">Skip to content</a>
+  <header class="border-b border-slate-200 bg-white"><nav class="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-4 py-4" aria-label="Main navigation">
+    <a href="index.html" class="mr-auto text-xl font-extrabold tracking-tight">LOCAL<span class="text-emerald-600">SKILL</span></a><a href="explore.html" class="text-sm font-semibold">Explore</a><a href="layout-dashboard.html" class="text-sm font-semibold">Workspace</a><a href="login.html" class="btn btn-sm bg-emerald-600 text-white hover:bg-emerald-700">Log in</a>
+  </nav></header>
+  <main id="content" class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">
+    <p class="text-xs font-bold uppercase tracking-widest text-emerald-700">Barikh's workspace &middot; Demo account</p>
+    <h1 class="mt-3 text-3xl font-bold">Messages</h1><p class="mt-3 max-w-3xl leading-7 text-slate-600">Keep your order conversations together, whether you are chatting with a provider or a customer.</p>
+<nav aria-label="Workspace navigation" class="my-6 flex flex-wrap gap-2">
+      <a href="layout-dashboard.html" class="btn btn-sm">Overview</a><a href="orders.html" class="btn btn-sm" data-workspace-nav="orders">My Orders</a><a href="messages.html" class="btn btn-sm" data-workspace-nav="messages">Messages</a><a href="reviews.html" class="btn btn-sm" data-workspace-nav="reviews">Reviews</a><a href="my-skill-profile.html" class="btn btn-sm" data-workspace-nav="my-skill-profile">My Skill Profile</a>
+    </nav><p id="storage-notice" role="status" class="mb-6 rounded-xl bg-emerald-50 p-4 text-sm leading-6 text-emerald-900">Demo only. Messages, reviews, and profile edits stay in this browser. Nothing is sent to another person or published.</p>
+    <noscript><p class="mb-6 rounded-xl bg-amber-50 p-4 text-amber-900">Enable JavaScript to use this demo. Editing and submission are disabled without it.</p></noscript>
+
+    <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+      <section class="min-w-0 rounded-2xl border border-slate-200 bg-white p-5" aria-labelledby="conversations-title"><h2 id="conversations-title" class="text-xl font-bold">Conversations</h2><div id="conversation-list" class="mt-4 grid max-h-80 gap-2 overflow-y-auto lg:max-h-[36rem]"></div></section>
+      <section id="conversation" hidden class="min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white" aria-labelledby="conversation-name">
+        <div class="border-b border-slate-200 p-6"><p id="conversation-role" class="text-xs font-bold uppercase tracking-wide text-emerald-700"></p><h2 id="conversation-name" class="mt-2 text-xl font-bold"></h2><p id="conversation-order" class="mt-2 text-sm text-slate-600"></p><a id="conversation-service" href="explore.html" class="mt-3 inline-block text-sm font-semibold text-emerald-700 underline">View service</a></div>
+        <ol id="chat-log" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions" class="flex max-h-96 min-h-64 flex-col gap-4 overflow-y-auto bg-slate-50 p-5"></ol>
+        <form id="message-form" class="grid gap-3 border-t border-slate-200 p-6"><label class="grid gap-2 text-sm font-semibold">Your message<textarea name="message" required maxlength="1000" rows="3" class="textarea textarea-bordered w-full" placeholder="Write about the brief, timing, or delivery..."></textarea></label><div class="flex flex-wrap items-center justify-between gap-3"><p class="text-xs text-slate-500">Local preview &middot; No delivery or live replies</p><button disabled type="submit" class="btn border-0 bg-emerald-600 text-white hover:bg-emerald-700">Send demo message</button></div><p id="message-feedback" role="status" class="text-sm text-emerald-800"></p></form>
+      </section>
+      <section id="conversation-empty" class="rounded-2xl border border-slate-200 bg-white p-8"><h2 class="text-xl font-bold">Choose a conversation</h2><p id="conversation-empty-text" class="mt-3 text-slate-600">Select an order on the left to see its provider or customer conversation.</p></section>
+    </div>
+
+  </main>
+  <footer class="border-t border-slate-200 bg-white"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-3 px-4 py-6 text-sm text-slate-600"><span>&copy; 2026 LOCALSKILL &middot; Built for campus life.</span><a href="index.html#how">Find &rarr; Match &rarr; Book &rarr; Complete &rarr; Review</a></div></footer>
+</body>
+</html>
