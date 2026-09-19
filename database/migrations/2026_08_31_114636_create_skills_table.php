@@ -14,16 +14,13 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
              $table->id();
 
-            $table->foreignId('category_id')
-                ->constrained('skill_categories')
-                ->cascadeOnDelete();
 
             $table->string('name');
             $table->text('description')->nullable();
 
             $table->timestamps();
 
-            $table->unique(['category_id', 'name']);
+            $table->unique([    'name']);
         });
     }
 

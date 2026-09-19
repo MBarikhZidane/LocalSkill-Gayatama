@@ -1,0 +1,161 @@
+@extends('layouts.app')
+@section('title', 'Dashboard')
+
+@section('content')
+    <div>
+        {{-- Header Section --}}
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    Admin Dashboard
+                </h1>
+            </div>
+            <span class="badge border-emerald-200 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800">
+                Admin Summary
+            </span>
+        </div>
+
+        {{-- 4 Main Statistics Cards --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+
+            {{-- Total Users --}}
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Total Users</p>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                        {{ number_format($totalUsers, 0, ',', '.') }}
+                    </h3>
+
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                </div>
+            </div>
+
+            {{-- Total Orders --}}
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Total Orders</p>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                        {{ number_format($totalOrders, 0, ',', '.') }}
+                    </h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                </div>
+            </div>
+
+            {{-- Total Services --}}
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Total Services</p>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                        {{ number_format($totalServices, 0, ',', '.') }}
+                    </h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+                    <i data-lucide="layers" class="w-6 h-6"></i>
+                </div>
+            </div>
+
+            {{-- Total Categories --}}
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Total Categories</p>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                        {{ number_format($totalCategories, 0, ',', '.') }}
+                    </h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                    <i data-lucide="grid" class="w-6 h-6"></i>
+                </div>
+            </div>
+
+        </div>
+
+        {{-- Recent Orders Table --}}
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-800 shadow-sm">
+            <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                <div>
+                    <h2 class="text-sm font-bold text-slate-900 dark:text-white">Recent Orders</h2>
+                </div>
+                <a href="{{ route('orders.index') }}" class="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                    View All <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-600 dark:text-slate-300">
+                    <thead class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400">
+                        <tr>
+                            <th class="p-4">Order No.</th>
+                            <th class="p-4">Customer</th>
+                            <th class="p-4">Provider</th>
+                            <th class="p-4">Service</th>
+                            <th class="p-4">Total Amount</th>
+                            <th class="p-4 text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                        @forelse($recentOrders as $order)
+                            <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition">
+                                <td class="p-4 font-bold text-slate-900 dark:text-white">
+                                    {{ $order->order_number }}
+                                </td>
+                                <td class="p-4">
+                                    <div class="font-medium text-slate-900 dark:text-white">
+                                        {{ $order->customer->name ?? '-' }}
+                                    </div>
+                                    <div class="text-[11px] text-slate-400">
+                                        {{ $order->customer->email ?? '-' }}
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="font-medium text-slate-900 dark:text-white">
+                                        {{ $order->provider->name ?? '-' }}
+                                    </div>
+                                    <div class="text-[11px] text-slate-400">
+                                        {{ $order->provider->email ?? '-' }}
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="font-medium text-slate-900 dark:text-white">
+                                        {{ $order->service->title ?? '-' }}
+                                    </div>
+                                </td>
+                                <td class="p-4 font-semibold text-emerald-600 dark:text-emerald-400">
+                                    Rp {{ number_format($order->total_amount, 0, ',', '.') }}
+                                </td>
+                                <td class="p-4 text-center">
+                                    @if($order->status === 'completed')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+                                            Completed
+                                        </span>
+                                    @elseif($order->status === 'pending')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300">
+                                            Pending
+                                        </span>
+                                    @elseif($order->status === 'cancelled')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300">
+                                            Cancelled
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">
+                                            {{ ucfirst($order->status) }}
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="p-8 text-center text-slate-400 dark:text-slate-500">
+                                    No recent order transactions found.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
