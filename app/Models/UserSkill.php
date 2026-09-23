@@ -12,6 +12,7 @@ class UserSkill extends Pivot
         'user_id',
         'skill_id',
         'proficiency_level',
+        'proficiency_percent',
         'years_experience',
         'is_verified',
     ];

@@ -1,386 +1,67 @@
-@extends('layouts.landingpage')
-
-{{-- @section('title', $user->name . ' - Service Provider Profile') --}}
-
-@section('content')
-    <main id="content" class="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:py-8">
-        <main>
-            <section class="hero" style="display: flex">
-
-                <!-- KIRI -->
-                <div class="hero-copy">
-                        <div class="eyebrow">Built for campus life</div>
-
-                        <h1>
-                            Talent, closer
-                            <em>than you think.</em>
-                        </h1>
-
-                    <div class="hero-bottom">
-                        <div>
-                            <p class="hero-lede">
-                                Find trusted student talent for the work that moves you
-                                forward—from a room away, not a world away.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- KANAN -->
-                <div class="hero-visual">
-
-                    <div class="skill-stack">
-
-                        <article class="skill-card">
-                            <div class="skill-icon">
-                                BK
-                            </div>
-
-                            <div>
-                                <h3>Design consultation</h3>
-                                <p>
-                                    Barikh &middot; 0.8 km away &middot; Rp150.000
-                                </p>
-                            </div>
-
-                            <span class="rating">
-                                &#9733; 4.9 (18 jobs)
-                            </span>
-                        </article>
-
-
-                        <article class="skill-card">
-                            <div class="skill-icon">
-                                AR
-                            </div>
-
-                            <div>
-                                <h3>Peer tutoring</h3>
-                                <p>
-                                    Aditya &middot; 0.4 km away &middot; Rp75.000
-                                </p>
-                            </div>
-
-                            <span class="rating">
-                                &#9733; 5.0 (24 jobs)
-                            </span>
-                        </article>
-
-
-                        <article class="skill-card">
-                            <div class="skill-icon">
-                                CM
-                            </div>
-
-                            <div>
-                                <h3>Graphic design</h3>
-                                <p>
-                                    Clara &middot; 1.2 km away &middot; Rp100.000
-                                </p>
-                            </div>
-
-                            <span class="rating">
-                                &#9733; 4.8 (32 jobs)
-                            </span>
-                        </article>
-
-                    </div>
-                </div>
-
-            </section>
-            <div class="ticker" aria-hidden="true">
-                <div class="ticker-track">
-                    <span>Design</span><span>Peer tutoring</span><span>Presentation slides design</span><span>Graduation and
-                        event photography</span><span>Graphic design</span><span>Photocopy
-                        services</span><span>Design</span><span>Peer tutoring</span><span>Presentation slides
-                        design</span><span>Graduation and event photography</span><span>Graphic design</span><span>Photocopy
-                        services</span>
-                </div>
-            </div>
-            <section class="intro" id="impact">
-                <div class="shell">
-                    <div class="intro-grid reveal">
-                        <div class="eyebrow">Opportunity, localised</div>
-                        <div class="intro-copy">
-                            <h2 class="display">
-                                The right skill can change your next move.
-                            </h2>
-                            <p>
-                                LOCALSKILL turns campus know-how into real opportunity. Students
-                                get fast, trusted help. Providers build a reputation, a
-                                portfolio, and an income—right where they study.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="stats reveal">
-                        <div class="stat">
-                            <strong>2.4k</strong><span>Active student providers</span>
-                        </div>
-                        <div class="stat">
-                            <strong>4.9/5</strong><span>Average service rating</span>
-                        </div>
-                        <div class="stat">
-                            <strong>86%</strong><span>Matched within the same faculty</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="services" id="services">
-                <div class="shell">
-                    <div class="section-head reveal">
-                        <div>
-                            <div class="eyebrow">Popular nearby</div>
-                            <h2 class="display" style="margin-top: 25px">
-                                Expertise for every ambition.
-                            </h2>
-                        </div>
-                        <a class="link-arrow" href="{{ route('explore.index') }}">Explore all skills <span class="arrow">→</span></a>
-                    </div>
-                    <div class="services-grid reveal">
-                        <div class="service" href="explore.html?category=design"><span class="service-num">01 / CAMPUS
-                                SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="palette" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Design</h3>
-                                <p>
-                                    A one-hour design consultation with a mood board and visual
-                                    direction for your campus project.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=peer-tutoring"><span class="service-num">02 / CAMPUS
-                                SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="graduation-cap" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Peer tutoring</h3>
-                                <p>
-                                    A one-hour peer study session to review course concepts and
-                                    prepare for exams.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=presentation-slides-design"><span
-                                class="service-num">03 / CAMPUS SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="presentation" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Presentation slides design</h3>
-                                <p>
-                                    A ten-slide presentation with clear layouts, consistent
-                                    typography, and one revision.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=graduation-event-photography"><span
-                                class="service-num">04 / CAMPUS SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="camera" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Graduation and event photography</h3>
-                                <p>
-                                    A one-hour graduation or campus event shoot with 20 edited
-                                    photos.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=graphic-design"><span class="service-num">05 / CAMPUS
-                                SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="pen-tool" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Graphic design</h3>
-                                <p>
-                                    A campus event poster and matching social media graphic with
-                                    one revision.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=photocopy-services"><span class="service-num">06 /
-                                CAMPUS SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="printer" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Photocopy services</h3>
-                                <p>
-                                    Nearby printing and photocopying for essays, journals, thesis
-                                    pages, and study materials.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="intro" id="photocopy" aria-labelledby="photocopy-title">
-                <div class="shell intro-grid">
-                    <div class="eyebrow">Photocopy services</div>
-                    <div class="intro-copy">
-                        <h2 class="display" id="photocopy-title">
-                            No printer at home? We can help.
-                        </h2>
-                        <p>
-                            Get your essays, journals, thesis pages, and study materials
-                            printed or photocopied by a nearby provider. Print from a digital
-                            document, or arrange to bring the original pages for photocopying.
-                        </p>
-                        <p>
-                            In your booking brief, mention printing or photocopying, the
-                            number of pages and copies, paper size, black-and-white or colour,
-                            single- or double-sided printing, and your deadline. Agree on the
-                            price, how to share your document or hand over originals, and a
-                            campus pickup point before confirming.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section class="how" id="how">
-                <div class="shell how-layout">
-                    <div class="how-sticky reveal">
-                        <div class="eyebrow">Simple by design</div>
-                        <h2 class="display">From need to done.</h2>
-                        <p>
-                            A clear process, campus-verified profiles, and real reviews keep
-                            every project moving with confidence.
-                        </p>
-                    </div>
-                    <div class="steps reveal">
-                        <article class="step">
-                            <span class="step-num">01</span>
-                            <div>
-                                <h3>Find</h3>
-                                <p>
-                                    Search by skill, describe your task, and set the timing and
-                                    budget that work for you.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">02</span>
-                            <div>
-                                <h3>Match</h3>
-                                <p>
-                                    Compare verified nearby providers by expertise, availability,
-                                    rating, and price.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">03</span>
-                            <div>
-                                <h3>Book</h3>
-                                <p>
-                                    Agree on the brief, keep communication in one place, and
-                                    confirm your booking.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">04</span>
-                            <div>
-                                <h3>Complete</h3>
-                                <p>
-                                    Check the delivered work against your brief and confirm
-                                    completion.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">05</span>
-                            <div>
-                                <h3>Review</h3>
-                                <p>
-                                    Share your experience and help other students find trusted
-                                    campus talent.
-                                </p>
-                            </div>
-                            <span>&#8599;</span>
-                        </article>
-                    </div>
-                </div>
-            </section>
-            <section class="feature" id="talent">
-                <div class="feature-art">
-                    <div class="orb one"></div>
-                    <div class="orb two"></div>
-                    <article class="profile-card">
-                        <div class="profile-top">
-                            <div class="avatar">BK</div>
-                            <div>
-                                <h3>Barikh K.</h3>
-                                <p>Verified student · 0.8 km away</p>
-                            </div>
-                        </div>
-                        <div class="skill-tags">
-                            <span>Design</span><span>Visual direction</span><span>Mood boards</span>
-                        </div>
-                        <div class="profile-foot">
-                            <span><strong>4.9 ★</strong><br />18 completed
-                                projects</span><span><strong>Rp150.000</strong><br />starting price</span>
-                        </div>
-                    </article>
-                </div>
-                <div class="feature-copy">
-                    <div class="eyebrow">Your talent has value</div>
-                    <h2 class="display">Build your name while you build your future.</h2>
-                    <p>
-                        Turn what you already know into experience that counts. Set your
-                        offer, choose your hours, and grow through real work with people
-                        around you.
-                    </p>
-                    <a class="btn" href="{{ route('register') }}">Become a provider <span>↗</span></a>
-                </div>
-            </section>
-            <section class="cta">
-                <div class="shell reveal">
-                    <div class="eyebrow">Start where you are</div>
-                    <h2 class="display">Your next opportunity may be across campus.</h2>
-                    <div class="cta-actions">
-                        <a class="btn btn-green" href="{{ route('register') }}">Join LOCALSKILL</a>
-                        <a class="btn btn-outline"
-                            href="{{ route('explore.index') }}">Explore services</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <script>
-            const observer = new IntersectionObserver(
-                (entries) =>
-                    entries.forEach((e) => {
-                        if (e.isIntersecting) e.target.classList.add("visible");
-                    }),
-                { threshold: 0.12 },
-            );
-            document
-                .querySelectorAll(".reveal")
-                .forEach((el) => observer.observe(el));
-            document.getElementById("heroSearch").addEventListener("submit", (e) => {
-                e.preventDefault();
-                const q = document.getElementById("searchInput").value.trim();
-                location.href = q
-                    ? "explore.html?q=" + encodeURIComponent(q)
-                    : "explore.html";
-            });
-            const menu = document.querySelector(".menu"),
-                links = document.querySelector(".nav-links");
-            menu.addEventListener("click", () => {
-                const open = menu.getAttribute("aria-expanded") === "true";
-                menu.setAttribute("aria-expanded", String(!open));
-                links.style.cssText = !open
-                    ? "display:flex;position:absolute;left:0;right:0;top:70px;padding:25px 24px;background:#f3f1e8;flex-direction:column;border-bottom:1px solid rgba(11,33,25,.18)"
-                    : "";
-            });
-        </script>
-
-    </main>
-@endsection
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find nearby students for design, peer tutoring, presentation slides design, graduation and event photography, graphic design, and photocopy services.">
+  <title>LOCALSKILL — Talent, closer than you think.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#0b2119;--forest:#103c2e;--green:#39e37f;--mint:#c9f8d9;--cream:#f3f1e8;--white:#fff;--line:rgba(11,33,25,.18);--muted:#5d6d66;--max:1440px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input{font:inherit}.shell{width:min(100% - 48px,var(--max));margin:auto}.eyebrow{display:flex;align-items:center;gap:10px;font:700 11px/1 "Manrope";letter-spacing:.16em;text-transform:uppercase}.eyebrow:before{content:"";width:28px;height:2px;background:currentColor}.arrow{display:inline-flex;width:35px;height:35px;border:1px solid;border-radius:50%;align-items:center;justify-content:center;transition:.25s}.link-arrow{display:inline-flex;align-items:center;gap:12px;font-weight:700}.link-arrow:hover .arrow{background:var(--green);border-color:var(--green);color:var(--ink);transform:translateX(4px)}
+    .topbar{height:36px;background:var(--ink);color:#cfddd7;font-size:11px;letter-spacing:.08em;text-transform:uppercase}.topbar .shell{height:100%;display:flex;justify-content:flex-end;align-items:center;gap:24px}.topbar a:hover{color:var(--green)}header{position:sticky;top:0;z-index:20;background:rgba(243,241,232,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{height:84px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}.brand{font:700 23px/1 "Manrope";letter-spacing:-.06em}.brand span{color:#189b55}.nav-links{display:flex;gap:36px;font-size:14px;font-weight:600}.nav-links a{position:relative}.nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:-8px;height:2px;background:var(--ink);transition:.25s}.nav-links a:hover:after{right:0}.nav-actions{display:flex;justify-content:flex-end;align-items:center;gap:18px}.btn{border:0;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:10px;min-height:46px;padding:0 22px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;transition:.25s}.btn:hover{background:var(--forest);transform:translateY(-2px)}.btn-green{background:var(--green);color:var(--ink)}.btn-green:hover{background:#72eea3}.menu{display:none;border:0;background:none;padding:8px}.menu svg{width:24px}
+    .hero{min-height:720px;background:var(--forest);color:white;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr);overflow:hidden}.hero-copy{padding:100px max(24px,calc((100vw - var(--max))/2 + 24px)) 78px;display:flex;flex-direction:column;justify-content:space-between}.hero h1{max-width:810px;margin:35px 0 42px;font:500 clamp(58px,6.6vw,108px)/.91 "Manrope";letter-spacing:-.072em}.hero h1 em{color:var(--green);font-style:normal}.hero-bottom{display:grid;grid-template-columns:1fr 270px;gap:42px;align-items:end}.hero-lede{max-width:460px;margin:0;color:#d2ded9;font-size:18px;line-height:1.55}.hero-search{margin-top:28px;display:flex;max-width:570px;background:white;padding:8px;color:var(--ink)}.hero-search input{flex:1;min-width:0;border:0;outline:0;padding:0 16px}.hero-search .btn{min-height:52px}.hero-note{padding-left:22px;border-left:1px solid #ffffff59;color:#b8cbc3;font-size:13px;line-height:1.55}.hero-note strong{display:block;color:white;font:600 24px "Manrope";margin-bottom:4px}.hero-visual{position:relative;min-height:720px;background:linear-gradient(145deg,#bfeccc,#57bc7d)}.hero-visual:before,.hero-visual:after{content:"";position:absolute;border-radius:50%}.hero-visual:before{width:490px;height:490px;right:-100px;top:60px;background:#83ecac}.hero-visual:after{width:300px;height:300px;left:-80px;bottom:-90px;border:80px solid #143d30}.skill-stack{position:absolute;inset:90px 8% 70px 10%;display:flex;flex-direction:column;justify-content:center;gap:14px;transform:rotate(-4deg)}.skill-card{position:relative;display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:18px;padding:20px;background:#fffffff2;color:var(--ink);box-shadow:0 24px 50px #103c2e33;transition:.3s}.skill-card:hover{transform:translateX(-8px)}.skill-card:nth-child(2){margin-left:12%;margin-right:-4%;background:var(--ink);color:white}.skill-card:nth-child(3){margin-right:12%}.skill-icon{width:64px;height:64px;background:var(--mint);display:grid;place-items:center;font:700 20px "Manrope"}.skill-card:nth-child(2) .skill-icon{background:var(--green);color:var(--ink)}.skill-card h3{margin:0 0 6px;font:700 15px "Manrope"}.skill-card p{margin:0;color:#76847e;font-size:12px}.skill-card:nth-child(2) p{color:#aac0b7}.rating{font-size:13px;font-weight:700}.live-pill{position:absolute;right:26px;top:26px;display:flex;align-items:center;gap:7px;padding:8px 11px;border-radius:99px;background:var(--cream);color:var(--ink);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}.live-pill:before{content:"";width:7px;height:7px;border-radius:50%;background:#18b45f;box-shadow:0 0 0 4px #18b45f29}
+    .ticker{background:var(--green);overflow:hidden;border-bottom:1px solid}.ticker-track{display:flex;width:max-content;animation:ticker 24s linear infinite}.ticker span{display:flex;align-items:center;gap:28px;padding:18px 30px;font:700 12px "Manrope";text-transform:uppercase;letter-spacing:.13em}.ticker span:after{content:"✦"}@keyframes ticker{to{transform:translateX(-50%)}}
+    .intro{padding:130px 0 110px}.intro-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px}.display{margin:0;font:500 clamp(43px,5vw,76px)/1.02 "Manrope";letter-spacing:-.055em}.intro-copy{max-width:830px}.intro-copy>p{max-width:650px;margin:35px 0 38px;color:var(--muted);font-size:18px;line-height:1.65}.stats{margin-top:100px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.stat{padding:35px 30px 0 0;border-right:1px solid var(--line)}.stat:not(:first-child){padding-left:30px}.stat:last-child{border-right:0}.stat strong{display:block;font:500 clamp(48px,5vw,76px)/1 "Manrope";letter-spacing:-.06em}.stat span{display:block;margin-top:12px;color:var(--muted);font-size:13px}
+    .services{padding:115px 0;background:var(--ink);color:white}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:58px}.section-head .display{max-width:700px}.services-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #ffffff40}.service{position:relative;min-height:470px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid #ffffff40;overflow:hidden}.service:last-child{border-right:0}.service:before{content:"";position:absolute;inset:100% 0 0;background:var(--green);transition:.4s cubic-bezier(.2,.7,.2,1)}.service:hover:before{inset:0}.service>*{position:relative;z-index:1}.service:hover{color:var(--ink)}.service-num{font-size:12px;color:#92a79e}.service:hover .service-num{color:var(--ink)}.service-icon{align-self:flex-end;width:155px;height:155px;border:1px solid #ffffff52;border-radius:50%;display:grid;place-items:center}.service-icon svg{width:55px;height:55px;stroke-width:1}.service:hover .service-icon{border-color:var(--ink)}.service h3{margin:0 0 13px;font:500 30px/1.1 "Manrope";letter-spacing:-.04em}.service p{max-width:310px;margin:0;color:#aebeb7;line-height:1.55;font-size:14px}.service:hover p{color:#254638}
+    .how{padding:130px 0}.how-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:100px}.how-sticky{align-self:start;position:sticky;top:135px}.how-sticky .display{margin:28px 0}.how-sticky p{max-width:430px;color:var(--muted);line-height:1.6}.steps{border-top:1px solid var(--line)}.step{display:grid;grid-template-columns:70px 1fr auto;gap:24px;padding:34px 0;border-bottom:1px solid var(--line);align-items:start}.step-num{color:#1b8f51;font:600 13px "Manrope"}.step h3{margin:0 0 8px;font:600 25px "Manrope";letter-spacing:-.035em}.step p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}.step svg{width:22px}
+    .feature{display:grid;grid-template-columns:1fr 1fr;min-height:670px}.feature-art{position:relative;overflow:hidden;background:#86dbaa}.orb{position:absolute;border-radius:50%;border:1px solid #0b211973}.orb.one{width:580px;height:580px;left:-120px;top:45px;background:#b9f3cd}.orb.two{width:300px;height:300px;right:-50px;bottom:-30px;background:var(--forest)}.profile-card{position:absolute;width:min(360px,70%);left:50%;top:50%;transform:translate(-50%,-50%) rotate(3deg);background:var(--cream);padding:28px;box-shadow:0 30px 60px #0b211933}.profile-top{display:flex;gap:16px;align-items:center}.avatar{width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--green);display:grid;place-items:center;font-weight:700}.profile-card h3{margin:0 0 4px;font:700 18px "Manrope"}.profile-card p{margin:0;color:var(--muted);font-size:12px}.skill-tags{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}.skill-tags span{border:1px solid var(--line);padding:7px 10px;font-size:11px}.profile-foot{border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;font-size:12px}.profile-foot strong{font-size:16px}.feature-copy{background:var(--green);padding:100px clamp(35px,7vw,115px);display:flex;flex-direction:column;justify-content:center}.feature-copy .display{margin:28px 0 34px}.feature-copy p{max-width:540px;font-size:17px;line-height:1.6}.feature-copy .btn{align-self:flex-start;margin-top:22px}
+    .cta{padding:120px 0;background:var(--forest);color:white;text-align:center}.cta .eyebrow{justify-content:center;color:var(--green)}.cta .display{max-width:940px;margin:28px auto 42px}.cta-actions{display:flex;justify-content:center;gap:12px}.btn-outline{background:transparent;border:1px solid #ffffff73}.btn-outline:hover{border-color:white;background:white;color:var(--ink)}footer{background:var(--ink);color:white;padding:70px 0 35px}.footer-main{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:65px;padding-bottom:75px}.footer-brand p{max-width:320px;color:#8fa49b;font-size:14px;line-height:1.6}.footer-col h4{margin:0 0 23px;color:#81978e;font-size:11px;text-transform:uppercase;letter-spacing:.14em}.footer-col a{display:block;margin:13px 0;font-size:13px}.footer-col a:hover{color:var(--green)}.footer-bottom{border-top:1px solid #ffffff2b;padding-top:25px;display:flex;justify-content:space-between;color:#7f968c;font-size:11px}.reveal{opacity:1;transform:none;transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:980px){.nav{grid-template-columns:1fr auto}.nav-links{display:none}.nav-actions .login{display:none}.menu{display:block}.hero{grid-template-columns:1fr}.hero-copy{min-height:650px;padding:75px 24px}.hero-visual{min-height:560px}.hero-bottom{grid-template-columns:1fr}.hero-note{display:none}.intro-grid,.how-layout{grid-template-columns:1fr;gap:45px}.stats{margin-top:65px}.how-sticky{position:static}.services-grid{grid-template-columns:1fr}.service{min-height:330px;border-right:0;border-bottom:1px solid #ffffff40}.service-icon{width:100px;height:100px}.feature{grid-template-columns:1fr}.feature-art{min-height:570px}.footer-main{grid-template-columns:2fr 1fr 1fr}.footer-col:last-child{display:none}}
+    @media(max-width:640px){.shell{width:min(100% - 32px,var(--max))}.topbar{display:none}.nav{height:70px}.nav-actions .btn{display:none}.hero-copy{min-height:600px;padding:62px 18px}.hero h1{font-size:52px;margin:30px 0}.hero-lede{font-size:16px}.hero-search{display:grid}.hero-search input{height:48px}.hero-visual{min-height:460px}.skill-stack{inset:70px 7% 40px}.skill-card{grid-template-columns:50px 1fr;padding:15px}.skill-icon{width:50px;height:50px}.skill-card .rating{display:block;grid-column:2;font-size:12px}.intro,.how{padding:85px 0}.intro-grid{gap:28px}.display{font-size:40px}.stats{grid-template-columns:1fr}.stat,.stat:not(:first-child){padding:24px 0;border-right:0;border-bottom:1px solid var(--line)}.section-head{align-items:start;flex-direction:column}.services{padding:85px 0}.service{padding:25px;min-height:320px}.step{grid-template-columns:38px 1fr}.step>svg{display:none}.feature-art{min-height:480px}.feature-copy{padding:75px 24px}.cta{padding:85px 0}.cta-actions{flex-direction:column}.footer-main{grid-template-columns:1fr 1fr;gap:40px}.footer-brand{grid-column:1/-1}.footer-bottom{flex-direction:column;gap:10px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track{animation:none}.reveal{transition:none}}
+  </style>
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div class="topbar"><div class="shell"><a href="#how">How it works</a><a href="#talent">Become a provider</a><a href="{{ route('login') }}">Log in</a></div></div>
+  <header><nav class="nav shell" aria-label="Main navigation"><a class="brand" href="#">LOCAL<span>SKILL</span></a><div class="nav-links"><a href="#services">Explore skills</a><a href="#how">How it works</a><a href="#impact">Our impact</a></div><div class="nav-actions"><a class="login" href="{{ route('login') }}">Log in</a><a class="btn" href="{{ route('register') }}">Join the network</a><button class="menu" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button></div></nav></header>
+  <main>
+    <section class="hero"><div class="hero-copy"><div><div class="eyebrow">Built for campus life</div><h1>Talent, closer <em>than you think.</em></h1></div><div class="hero-bottom"><div><p class="hero-lede">Find trusted student talent for the work that moves you forward—from a room away, not a world away.</p><form class="hero-search" id="heroSearch" action="{{ route('explore.index') }}" method="get"><input id="searchInput" name="q" type="search" placeholder="What skill do you need?" aria-label="Search skills"><button class="btn btn-green" type="submit">Find talent <span>↗</span></button></form></div><div class="hero-note"><strong>12 min</strong>Average response time from a verified provider near you.</div></div></div><div class="hero-visual"><span class="live-pill">124 available now</span><div class="skill-stack"><article class="skill-card"><div class="skill-icon" role="img" aria-label="Barikh avatar">BK</div><div><h3>Design consultation</h3><p>Barikh &middot; 0.8 km away &middot; Rp150.000</p></div><span class="rating">&#9733; 4.9 (18 jobs)</span></article><article class="skill-card"><div class="skill-icon" role="img" aria-label="Aditya avatar">AR</div><div><h3>Peer tutoring</h3><p>Aditya &middot; 0.4 km away &middot; Rp75.000</p></div><span class="rating">&#9733; 5.0 (24 jobs)</span></article><article class="skill-card"><div class="skill-icon" role="img" aria-label="Clara avatar">CM</div><div><h3>Graphic design</h3><p>Clara &middot; 1.2 km away &middot; Rp100.000</p></div><span class="rating">&#9733; 4.8 (32 jobs)</span></article></div></div></section>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Design</span><span>Peer tutoring</span><span>Presentation slides design</span><span>Graduation and event photography</span><span>Graphic design</span><span>Photocopy services</span><span>Design</span><span>Peer tutoring</span><span>Presentation slides design</span><span>Graduation and event photography</span><span>Graphic design</span><span>Photocopy services</span></div></div>
+    <section class="intro" id="impact"><div class="shell"><div class="intro-grid reveal"><div class="eyebrow">Opportunity, localised</div><div class="intro-copy"><h2 class="display">The right skill can change your next move.</h2><p>LOCALSKILL turns campus know-how into real opportunity. Students get fast, trusted help. Providers build a reputation, a portfolio, and an income—right where they study.</p><a class="link-arrow" href="#how">Discover our approach <span class="arrow">→</span></a></div></div><div class="stats reveal"><div class="stat"><strong>2.4k</strong><span>Active student providers</span></div><div class="stat"><strong>4.9/5</strong><span>Average service rating</span></div><div class="stat"><strong>86%</strong><span>Matched within the same faculty</span></div></div></div></section>
+    <section class="services" id="services"><div class="shell"><div class="section-head reveal"><div><div class="eyebrow">Popular nearby</div><h2 class="display" style="margin-top:25px">Expertise for every ambition.</h2></div><a class="link-arrow" href="{{ route('explore.index') }}">Explore all skills <span class="arrow">→</span></a></div><div class="services-grid reveal">
+      <a class="service" href="{{ route('explore.index') }}?category=design"><span class="service-num">01 / CAMPUS SKILLS</span><div class="service-icon"><i data-lucide="palette" aria-hidden="true"></i></div><div><h3>Design</h3><p>A one-hour design consultation with a mood board and visual direction for your campus project.</p></div></a>
+      <a class="service" href="{{ route('explore.index') }}?category=peer-tutoring"><span class="service-num">02 / CAMPUS SKILLS</span><div class="service-icon"><i data-lucide="graduation-cap" aria-hidden="true"></i></div><div><h3>Peer tutoring</h3><p>A one-hour peer study session to review course concepts and prepare for exams.</p></div></a>
+      <a class="service" href="{{ route('explore.index') }}?category=presentation-slides-design"><span class="service-num">03 / CAMPUS SKILLS</span><div class="service-icon"><i data-lucide="presentation" aria-hidden="true"></i></div><div><h3>Presentation slides design</h3><p>A ten-slide presentation with clear layouts, consistent typography, and one revision.</p></div></a>
+      <a class="service" href="{{ route('explore.index') }}?category=graduation-event-photography"><span class="service-num">04 / CAMPUS SKILLS</span><div class="service-icon"><i data-lucide="camera" aria-hidden="true"></i></div><div><h3>Graduation and event photography</h3><p>A one-hour graduation or campus event shoot with 20 edited photos.</p></div></a>
+      <a class="service" href="{{ route('explore.index') }}?category=graphic-design"><span class="service-num">05 / CAMPUS SKILLS</span><div class="service-icon"><i data-lucide="pen-tool" aria-hidden="true"></i></div><div><h3>Graphic design</h3><p>A campus event poster and matching social media graphic with one revision.</p></div></a>
+      <a class="service" href="{{ route('explore.index') }}?category=photocopy-services"><span class="service-num">06 / CAMPUS SKILLS</span><div class="service-icon"><i data-lucide="printer" aria-hidden="true"></i></div><div><h3>Photocopy services</h3><p>Nearby printing and photocopying for essays, journals, thesis pages, and study materials.</p></div></a>
+    </div></div></section>
+    <section class="intro" id="photocopy" aria-labelledby="photocopy-title"><div class="shell intro-grid"><div class="eyebrow">Photocopy services</div><div class="intro-copy"><h2 class="display" id="photocopy-title">No printer at home? We can help.</h2><p>Get your essays, journals, thesis pages, and study materials printed or photocopied by a nearby provider. Print from a digital document, or arrange to bring the original pages for photocopying.</p><p>In your booking brief, mention printing or photocopying, the number of pages and copies, paper size, black-and-white or colour, single- or double-sided printing, and your deadline. Agree on the price, how to share your document or hand over originals, and a campus pickup point before confirming.</p><a class="link-arrow" href="{{ route('explore.index') }}?category=photocopy-services">Find photocopy services <span class="arrow">&rarr;</span></a></div></div></section>
+    <section class="how" id="how"><div class="shell how-layout"><div class="how-sticky reveal"><div class="eyebrow">Simple by design</div><h2 class="display">From need to done.</h2><p>A clear process, campus-verified profiles, and real reviews keep every project moving with confidence.</p></div><div class="steps reveal">
+      <article class="step"><span class="step-num">01</span><div><h3>Find</h3><p>Search by skill, describe your task, and set the timing and budget that work for you.</p></div><span>↗</span></article>
+      <article class="step"><span class="step-num">02</span><div><h3>Match</h3><p>Compare verified nearby providers by expertise, availability, rating, and price.</p></div><span>↗</span></article>
+      <article class="step"><span class="step-num">03</span><div><h3>Book</h3><p>Agree on the brief, keep communication in one place, and confirm your booking.</p></div><span>↗</span></article>
+      <article class="step"><span class="step-num">04</span><div><h3>Complete</h3><p>Check the delivered work against your brief and confirm completion.</p></div><span>↗</span></article>
+      <article class="step"><span class="step-num">05</span><div><h3>Review</h3><p>Share your experience and help other students find trusted campus talent.</p></div><span>&#8599;</span></article>
+    </div></div></section>
+    <section class="feature" id="talent"><div class="feature-art"><div class="orb one"></div><div class="orb two"></div><article class="profile-card"><div class="profile-top"><div class="avatar">BK</div><div><h3><a href="{{ route('explore.index', ['q' => 'Design']) }}" style="text-decoration:underline;text-underline-offset:4px">Barikh K. &rarr;</a></h3><p>Verified student · 0.8 km away</p></div></div><div class="skill-tags"><span>Design</span><span>Visual direction</span><span>Mood boards</span></div><div class="profile-foot"><span><strong>4.9 ★</strong><br>24 completed projects</span><span><strong>Rp150.000</strong><br>starting price</span></div></article></div><div class="feature-copy"><div class="eyebrow">Your talent has value</div><h2 class="display">Build your name while you build your future.</h2><p>Turn what you already know into experience that counts. Set your offer, choose your hours, and grow through real work with people around you.</p><a class="btn" href="{{ route('register') }}">Become a provider <span>↗</span></a></div></section>
+    <section class="cta"><div class="shell reveal"><div class="eyebrow">Start where you are</div><h2 class="display">Your next opportunity may be across campus.</h2><div class="cta-actions"><a class="btn btn-green" href="{{ route('register') }}">Join LOCALSKILL</a><a class="btn btn-outline" href="{{ route('explore.index') }}">Explore services</a></div></div></section>
+  </main>
+  <footer><div class="shell"><div class="footer-main"><div class="footer-brand"><a class="brand" href="#">LOCAL<span>SKILL</span></a><p>A trusted marketplace for student talent, built around the places and people you already know.</p></div><div class="footer-col"><h4>Platform</h4><a href="{{ route('explore.index') }}">Explore skills</a><a href="#how">How it works</a><a href="{{ route('register') }}">Become a provider</a></div><div class="footer-col"><h4>Company</h4><a href="#impact">Our impact</a><a href="{{ route('campus') }}">Campus hub</a><a href="#photocopy">About photocopy services</a><a href="{{ route('user.dashboarduser') }}">Student workspace</a></div><div class="footer-col"><h4>Workspace</h4><a href="{{ route('user.dashboarduser') }}#orders">My orders</a><a href="{{ route('user.dashboarduser') }}#services">My services</a><a href="{{ route('admin.dashboard') }}">Administration</a></div></div><div class="footer-bottom"><span>© 2026 LOCALSKILL. All rights reserved.</span><span>Made for students, by students.</span></div></div></footer>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  window.lucide?.createIcons();
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }), {threshold: .12});
+  document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+  const menu = document.querySelector('.menu'), links = document.querySelector('.nav-links');
+  menu.addEventListener('click', () => {
+    const open = menu.getAttribute('aria-expanded') === 'true';
+    menu.setAttribute('aria-expanded', String(!open));
+    links.style.cssText = !open ? 'display:flex;position:absolute;left:0;right:0;top:70px;padding:25px 24px;background:#f3f1e8;flex-direction:column;border-bottom:1px solid rgba(11,33,25,.18)' : '';
+  });
+});
+</script>
+</body>
+</html>

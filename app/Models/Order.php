@@ -20,6 +20,8 @@ class Order extends Model
         'platform_fee',
         'total_amount',
         'status',
+        'scheduled_date',
+        'brief',
         'started_at',
         'completed_at',
     ];

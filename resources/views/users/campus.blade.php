@@ -1,0 +1,9 @@
+@extends('layouts.landingpage')
+@section('title', 'Campus hub | LOCALSKILL')
+@section('content')
+<main id="content" class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">
+    <section class="rounded-3xl bg-emerald-950 px-6 py-12 text-white sm:p-16"><p class="text-sm font-semibold text-emerald-300">BUILT FOR CAMPUS LIFE</p><h1 class="mt-4 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">Talent, closer than you think.</h1><p class="mt-5 max-w-xl leading-7 text-emerald-100">Find design, peer tutoring, presentation slides design, graduation and event photography, graphic design, and photocopy services from students nearby. One account to book or offer skills.</p><div class="mt-8 flex flex-wrap gap-3"><a href="{{ route('explore.index') }}" class="btn border-0 bg-emerald-600 text-white hover:bg-emerald-700">Explore skills</a><a href="{{ route('register') }}" class="btn bg-white text-slate-800">Join LOCALSKILL</a></div></section>
+    <section class="py-10"><h2 class="text-2xl font-bold">From need to done</h2><ol class="mt-5 grid gap-3 sm:grid-cols-5"><li class="rounded-2xl border border-slate-200 bg-white p-6"><span class="text-sm text-emerald-700">01</span><h3 class="mt-2 font-bold">Find</h3></li><li class="rounded-2xl border border-slate-200 bg-white p-6"><span class="text-sm text-emerald-700">02</span><h3 class="mt-2 font-bold">Match</h3></li><li class="rounded-2xl border border-slate-200 bg-white p-6"><span class="text-sm text-emerald-700">03</span><h3 class="mt-2 font-bold">Book</h3></li><li class="rounded-2xl border border-slate-200 bg-white p-6"><span class="text-sm text-emerald-700">04</span><h3 class="mt-2 font-bold">Complete</h3></li><li class="rounded-2xl border border-slate-200 bg-white p-6"><span class="text-sm text-emerald-700">05</span><h3 class="mt-2 font-bold">Review</h3></li></ol></section>
+    
+  </main>
+@endsection

@@ -20,6 +20,7 @@ class Service extends Model
         'price',
         'estimated_days',
         'status',
+        'moderation_note',
     ];
 
     public function user(): BelongsTo

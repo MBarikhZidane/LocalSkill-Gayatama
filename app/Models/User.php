@@ -19,6 +19,7 @@ class User extends Authenticatable
         'role',
         'phone',
         'bio',
+        'professional_title',
         'password',
     ];
 
@@ -39,7 +40,7 @@ class User extends Authenticatable
     {
         return $this->role === 'provider';
     }
-    
+
     public function university()
     {
         return $this->belongsTo(University::class);
@@ -53,9 +54,9 @@ class User extends Authenticatable
     public function skills()
     {
         return $this->belongsToMany(Skill::class, 'user_skills')
-                    ->using(UserSkill::class)
-                    ->withPivot(['proficiency_level', 'years_experience', 'is_verified'])
-                    ->withTimestamps();
+            ->using(UserSkill::class)
+            ->withPivot(['proficiency_level', 'proficiency_percent', 'years_experience', 'is_verified'])
+            ->withTimestamps();
     }
 
     public function portofolios()
@@ -96,15 +97,13 @@ class User extends Authenticatable
     public function communitiesJoined()
     {
         return $this->belongsToMany(Community::class, 'community_members')
-                    ->withPivot('joined_at')
-                    ->withTimestamps();
+            ->withPivot('joined_at')
+            ->withTimestamps();
     }
 
     public function conservations()
     {
         return $this->belongsToMany(Conservation::class, 'conservation_participants')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
-
-    
 }

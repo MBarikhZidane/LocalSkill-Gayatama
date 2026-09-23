@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\SkillCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ExplorController extends Controller
 {
@@ -13,46 +14,53 @@ class ExplorController extends Controller
     {
         // 1. Ambil input filter dari request
         $filters = $request->only([
-            'q', 'category_id', 'location', 
-            'min_price', 'max_price', 'min_rating', 'sort'
+            'q', 'category_id', 'location',
+            'min_price', 'max_price', 'min_rating', 'sort',
         ]);
+
+        $categories = SkillCategory::all();
+        if ($request->filled('category') && empty($filters['category_id'])) {
+            $categorySlug = str_replace('graduation-event-photography', 'graduation-and-event-photography', $request->string('category')->toString());
+            $category = $categories->first(fn (SkillCategory $category): bool => Str::slug($category->name) === $categorySlug);
+            $filters['category_id'] = $category?->id ?? 0;
+        }
 
         // 2. Inisialisasi Query dasar dengan Eager Loading
         $query = Service::with(['user.university', 'user.location', 'category'])
             ->where('status', 'active');
 
         // 3. Filter Kata Kunci (Judul, Deskripsi, atau Nama User)
-        if (!empty($filters['q'])) {
+        if (! empty($filters['q'])) {
             $search = $filters['q'];
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhereHas('user', fn($u) => $u->where('name', 'like', "%{$search}%"));
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhereHas('user', fn ($u) => $u->where('name', 'like', "%{$search}%"));
             });
         }
 
         // 4. Filter Kategori
-        if (!empty($filters['category_id'])) {
+        if (isset($filters['category_id']) && $filters['category_id'] !== '') {
             $query->where('category_id', $filters['category_id']);
         }
 
         // 5. Filter Range Harga
-        if (!empty($filters['min_price'])) {
+        if (! empty($filters['min_price'])) {
             $query->where('price', '>=', $filters['min_price']);
         }
-        if (!empty($filters['max_price'])) {
+        if (! empty($filters['max_price'])) {
             $query->where('price', '<=', $filters['max_price']);
         }
 
         // 6. Filter Lokasi / Kampus
-        if (!empty($filters['location'])) {
+        if (! empty($filters['location'])) {
             $location = $filters['location'];
             $query->where(function ($q) use ($location) {
                 $q->whereHas('user.location', function ($l) use ($location) {
                     $l->where('address', 'like', "%{$location}%");
                 })->orWhereHas('user.university', function ($u) use ($location) {
                     $u->where('name', 'like', "%{$location}%")
-                      ->orWhere('city', 'like', "%{$location}%");
+                        ->orWhere('city', 'like', "%{$location}%");
                 });
             });
         }
@@ -61,21 +69,23 @@ class ExplorController extends Controller
         $query->withCount(['orders as completed_orders_count' => function ($q) {
             $q->where('status', 'completed');
         }])
-        ->withAvg('reviews as average_rating', 'rating');
+            ->withAvg('reviews as average_rating', 'rating');
 
         // 8. Filter Minimal Rating
-        if (!empty($filters['min_rating'])) {
-            $query->having('average_rating', '>=', $filters['min_rating']);
+        if (! empty($filters['min_rating'])) {
+            $query->whereHas('reviews', function ($reviews) use ($filters): void {
+                $reviews->selectRaw('1')->groupBy('orders.service_id')->havingRaw('AVG(reviews.rating) >= CAST(? AS DECIMAL(10, 2))', [$filters['min_rating']]);
+            });
         }
 
         // 9. Pengurutan Data
         $sort = $filters['sort'] ?? 'latest';
         match ($sort) {
-            'price_low'  => $query->orderBy('price', 'asc'),
+            'price_low' => $query->orderBy('price', 'asc'),
             'price_high' => $query->orderBy('price', 'desc'),
-            'popular'    => $query->orderByDesc('completed_orders_count'),
-            'rating'     => $query->orderByDesc('average_rating'),
-            default      => $query->latest(),
+            'popular' => $query->orderByDesc('completed_orders_count'),
+            'rating' => $query->orderByDesc('average_rating'),
+            default => $query->latest(),
         };
 
         // 10. Eksekusi Pagination

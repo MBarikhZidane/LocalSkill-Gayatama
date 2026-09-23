@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\StudyProgram;
-use App\Models\University;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -30,11 +28,11 @@ class UserFactory extends Factory
         $lastName = fake()->lastName();
 
         return [
-            'university_id' => University::inRandomOrder()->first()?->id ?? University::factory(),
-            'study_program_id' => StudyProgram::inRandomOrder()->first()?->id ?? StudyProgram::factory(),
+            'university_id' => null,
+            'study_program_id' => null,
             'name' => "$firstName $lastName",
-            'email' => strtolower("$firstName.$lastName" . fake()->unique()->numberBetween(10, 99) . '@gmail.com'),
-            'phone' => '08' . fake()->numerify('##########'),
+            'email' => strtolower("$firstName.$lastName".fake()->unique()->numberBetween(10, 99).'@gmail.com'),
+            'phone' => '08'.fake()->numerify('##########'),
             'bio' => fake()->sentence(10),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),

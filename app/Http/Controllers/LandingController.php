@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Service;
-use App\Models\StudyProgram;
 use App\Models\University;
 use App\Models\User;
 use App\Notifications\OrderStatusChanged;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class LandingController extends Controller
 {
@@ -20,9 +18,11 @@ class LandingController extends Controller
     {
         $service = Service::with([
             'user.skills',
+            'user.university',
+            'user.location',
             'user.portofolios.skill',
             'category',
-            'reviews.reviewer'
+            'reviews.reviewer',
         ])->findOrFail($id);
 
         $avgRating = $service->reviews->avg('rating') ?? 0;
@@ -43,7 +43,7 @@ class LandingController extends Controller
                     ->where('reviewer_id', Auth::id())
                     ->exists();
 
-                $canReview = !$alreadyReviewed;
+                $canReview = ! $alreadyReviewed;
             }
         }
 
@@ -79,11 +79,11 @@ class LandingController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $view = $request->input('view', 'buying');
+        $view = in_array($request->input('view'), ['selling', 'providing'], true) ? 'selling' : 'buying';
         $status = $request->input('status', 'all');
         $search = $request->input('search');
 
-        $query = Order::with(['service', 'provider', 'customer', 'serviceRequest']);
+        $query = Order::with(['service', 'provider', 'customer']);
 
         if ($view === 'selling') {
             $query->where('provider_id', $user->id);
@@ -131,7 +131,7 @@ class LandingController extends Controller
         }
 
         $order->update([
-            'status' => 'cancelled'
+            'status' => 'cancelled',
         ]);
 
         // 🔔 KIRIM NOTIFIKASI KE PROVIDER
@@ -150,7 +150,7 @@ class LandingController extends Controller
             'skills',
             'portofolios.skill',
             'services.category',
-            'location'
+            'location',
         ])->findOrFail($id);
 
         $providerOrderIds = Order::where('provider_id', $user->id)->pluck('id');
@@ -181,18 +181,20 @@ class LandingController extends Controller
     {
         $request->validate([
             'service_id' => 'required',
-            'scheduled_date' => 'required|date|after_or_equal:today|before_or_equal:tomorrow',
-            'brief' => 'nullable|string|max:2000',
+            'scheduled_date' => 'required|date|after_or_equal:today',
+            'brief' => 'required|string|min:20|max:2000',
         ]);
 
         $service = Service::findOrFail($request->service_id);
+
+        abort_unless($service->status === 'active' && $service->user_id !== Auth::id(), 403);
 
         $price = $service->price;
         $platformFee = 0;
         $totalAmount = $price + $platformFee;
 
         $order = Order::create([
-            'order_number' => 'ORD-' . strtoupper(Str::random(8)),
+            'order_number' => 'ORD-'.strtoupper(Str::random(8)),
             'customer_id' => Auth::id(),
             'provider_id' => $service->user_id,
             'service_id' => $service->id,
@@ -227,10 +229,10 @@ class LandingController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'name'             => ['required', 'string', 'max:255'],
-            'email'            => ['required', 'string', 'email', 'max:255'],
-            'phone'            => ['nullable', 'string', 'max:20'],
-            'bio'              => ['nullable', 'string', 'max:1000'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'bio' => ['nullable', 'string', 'max:1000'],
         ]);
 
         $user->update($request->only([
