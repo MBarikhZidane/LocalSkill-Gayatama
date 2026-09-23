@@ -22,6 +22,25 @@
                                 Find trusted student talent for the work that moves you
                                 forward—from a room away, not a world away.
                             </p>
+                            <form
+    action="{{ route('explore.index') }}"
+    method="GET"
+    class="hero-search"
+    id="heroSearch"
+>
+    <input
+        id="searchInput"
+        name="q"
+        type="search"
+        value="{{ request('q') }}"
+        placeholder="What skill do you need?"
+        aria-label="Search skills"
+    >
+
+    <button class="btn btn-green" type="submit">
+        Find talent <span aria-hidden="true">↗</span>
+    </button>
+</form>
                         </div>
                     </div>
                 </div>
@@ -124,100 +143,132 @@
                     </div>
                 </div>
             </section>
-            <section class="services" id="services">
-                <div class="shell">
-                    <div class="section-head reveal">
-                        <div>
-                            <div class="eyebrow">Popular nearby</div>
-                            <h2 class="display" style="margin-top: 25px">
-                                Expertise for every ambition.
-                            </h2>
-                        </div>
-                        <a class="link-arrow" href="{{ route('explore.index') }}">Explore all skills <span class="arrow">→</span></a>
-                    </div>
-                    <div class="services-grid reveal">
-                        <div class="service" href="explore.html?category=design"><span class="service-num">01 / CAMPUS
-                                SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="palette" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Design</h3>
-                                <p>
-                                    A one-hour design consultation with a mood board and visual
-                                    direction for your campus project.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=peer-tutoring"><span class="service-num">02 / CAMPUS
-                                SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="graduation-cap" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Peer tutoring</h3>
-                                <p>
-                                    A one-hour peer study session to review course concepts and
-                                    prepare for exams.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=presentation-slides-design"><span
-                                class="service-num">03 / CAMPUS SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="presentation" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Presentation slides design</h3>
-                                <p>
-                                    A ten-slide presentation with clear layouts, consistent
-                                    typography, and one revision.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=graduation-event-photography"><span
-                                class="service-num">04 / CAMPUS SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="camera" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Graduation and event photography</h3>
-                                <p>
-                                    A one-hour graduation or campus event shoot with 20 edited
-                                    photos.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=graphic-design"><span class="service-num">05 / CAMPUS
-                                SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="pen-tool" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Graphic design</h3>
-                                <p>
-                                    A campus event poster and matching social media graphic with
-                                    one revision.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service" href="explore.html?category=photocopy-services"><span class="service-num">06 /
-                                CAMPUS SKILLS</span>
-                            <div class="service-icon">
-                                <i data-lucide="printer" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3>Photocopy services</h3>
-                                <p>
-                                    Nearby printing and photocopying for essays, journals, thesis
-                                    pages, and study materials.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+<section class="services" id="services">
+    <div class="shell">
+        <div class="section-head reveal">
+            <div>
+                <div class="eyebrow">Popular nearby</div>
+                <h2 class="display" style="margin-top: 25px">
+                    Expertise for every ambition.
+                </h2>
+            </div>
+
+            <a class="link-arrow" href="{{ route('explore.index') }}">
+                Explore all skills <span class="arrow">→</span>
+            </a>
+        </div>
+
+        <div class="services-grid reveal">
+            <a
+                class="service"
+                href="{{ route('explore.index', ['q' => 'Design']) }}"
+                style="color: inherit; text-decoration: none;"
+            >
+                <span class="service-num">01 / CAMPUS SKILLS</span>
+                <div class="service-icon">
+                    <i data-lucide="palette" aria-hidden="true"></i>
                 </div>
-            </section>
-            <section class="intro" id="photocopy" aria-labelledby="photocopy-title">
+                <div>
+                    <h3>Design</h3>
+                    <p>
+                        A one-hour design consultation with a mood board and visual
+                        direction for your campus project.
+                    </p>
+                </div>
+            </a>
+
+            <a
+                class="service"
+                href="{{ route('explore.index', ['q' => 'Peer tutoring']) }}"
+                style="color: inherit; text-decoration: none;"
+            >
+                <span class="service-num">02 / CAMPUS SKILLS</span>
+                <div class="service-icon">
+                    <i data-lucide="graduation-cap" aria-hidden="true"></i>
+                </div>
+                <div>
+                    <h3>Peer tutoring</h3>
+                    <p>
+                        A one-hour peer study session to review course concepts and
+                        prepare for exams.
+                    </p>
+                </div>
+            </a>
+
+            <a
+                class="service"
+                href="{{ route('explore.index', ['q' => 'Presentation slides design']) }}"
+                style="color: inherit; text-decoration: none;"
+            >
+                <span class="service-num">03 / CAMPUS SKILLS</span>
+                <div class="service-icon">
+                    <i data-lucide="presentation" aria-hidden="true"></i>
+                </div>
+                <div>
+                    <h3>Presentation slides design</h3>
+                    <p>
+                        A ten-slide presentation with clear layouts, consistent
+                        typography, and one revision.
+                    </p>
+                </div>
+            </a>
+
+            <a
+                class="service"
+                href="{{ route('explore.index', ['q' => 'Graduation and event photography']) }}"
+                style="color: inherit; text-decoration: none;"
+            >
+                <span class="service-num">04 / CAMPUS SKILLS</span>
+                <div class="service-icon">
+                    <i data-lucide="camera" aria-hidden="true"></i>
+                </div>
+                <div>
+                    <h3>Graduation and event photography</h3>
+                    <p>
+                        A one-hour graduation or campus event shoot with 20 edited
+                        photos.
+                    </p>
+                </div>
+            </a>
+
+            <a
+                class="service"
+                href="{{ route('explore.index', ['q' => 'Graphic design']) }}"
+                style="color: inherit; text-decoration: none;"
+            >
+                <span class="service-num">05 / CAMPUS SKILLS</span>
+                <div class="service-icon">
+                    <i data-lucide="pen-tool" aria-hidden="true"></i>
+                </div>
+                <div>
+                    <h3>Graphic design</h3>
+                    <p>
+                        A campus event poster and matching social media graphic with
+                        one revision.
+                    </p>
+                </div>
+            </a>
+
+            <a
+                class="service"
+                href="{{ route('explore.index', ['q' => 'Photocopy services']) }}"
+                style="color: inherit; text-decoration: none;"
+            >
+                <span class="service-num">06 / CAMPUS SKILLS</span>
+                <div class="service-icon">
+                    <i data-lucide="printer" aria-hidden="true"></i>
+                </div>
+                <div>
+                    <h3>Photocopy services</h3>
+                    <p>
+                        Nearby printing and photocopying for essays, journals, thesis
+                        pages, and study materials.
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>            <section class="intro" id="photocopy" aria-labelledby="photocopy-title">
                 <div class="shell intro-grid">
                     <div class="eyebrow">Photocopy services</div>
                     <div class="intro-copy">
@@ -239,75 +290,366 @@
                     </div>
                 </div>
             </section>
-            <section class="how" id="how">
-                <div class="shell how-layout">
-                    <div class="how-sticky reveal">
-                        <div class="eyebrow">Simple by design</div>
-                        <h2 class="display">From need to done.</h2>
-                        <p>
-                            A clear process, campus-verified profiles, and real reviews keep
-                            every project moving with confidence.
+<section class="w-full overflow-hidden py-12 sm:py-16 md:py-20 lg:py-28" id="how">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div class="grid grid-cols-1 items-start gap-8 sm:gap-10 md:gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 xl:gap-24">
+
+            {{-- ================= LEFT CONTENT ================= --}}
+            <div class="reveal lg:sticky lg:top-24">
+
+                {{-- Eyebrow --}}
+                <div class="mb-2 text-xs font-semibold uppercase tracking-[0.15em]
+                            text-emerald-600
+                            sm:mb-3 sm:text-sm
+                            md:text-base">
+                    Simple by design
+                </div>
+
+                {{-- Heading --}}
+                <h2 class="max-w-xl
+                           text-3xl font-bold leading-[1]
+                           tracking-tight text-slate-900
+                           sm:text-4xl
+                           md:text-5xl
+                           lg:text-6xl
+                           xl:text-7xl
+                           dark:text-white">
+                    From need to done.
+                </h2>
+
+                {{-- Description --}}
+                <p class="mt-4 max-w-xl
+                          text-xs leading-5
+                          text-slate-500
+                          sm:mt-5 sm:text-sm sm:leading-6
+                          md:text-base md:leading-7
+                          lg:text-lg
+                          dark:text-slate-400">
+                    A clear process, campus-verified profiles, and real reviews keep
+                    every project moving with confidence.
+                </p>
+
+            </div>
+
+
+            {{-- ================= STEPS ================= --}}
+            <div class="reveal flex min-w-0 flex-col gap-2.5 sm:gap-3">
+
+                {{-- Step 01 --}}
+                <article
+                    class="group grid w-full min-w-0
+                           grid-cols-[32px_minmax(0,1fr)_20px]
+                           items-start gap-2.5
+                           rounded-xl border border-slate-200
+                           bg-white p-3
+                           transition-all duration-300
+                           hover:-translate-y-0.5
+                           hover:border-slate-300
+                           hover:shadow-md
+
+                           sm:grid-cols-[38px_minmax(0,1fr)_24px]
+                           sm:gap-3 sm:rounded-2xl sm:p-4
+
+                           md:grid-cols-[44px_minmax(0,1fr)_28px]
+                           md:gap-4 md:p-5
+
+                           lg:p-6
+
+                           dark:border-slate-800
+                           dark:bg-slate-900"
+                >
+
+                    <span
+                        class="flex h-7 w-7 shrink-0 items-center justify-center
+                               rounded-full bg-emerald-50
+                               text-[10px] font-bold text-emerald-700
+                               sm:h-8 sm:w-8 sm:text-xs
+                               md:h-10 md:w-10 md:text-sm
+                               dark:bg-emerald-950/50 dark:text-emerald-400"
+                    >
+                        01
+                    </span>
+
+                    <div class="min-w-0">
+                        <h3 class="text-sm font-semibold text-slate-900
+                                   sm:text-base
+                                   md:text-lg
+                                   dark:text-white">
+                            Find
+                        </h3>
+
+                        <p class="mt-1 text-[11px] leading-5 text-slate-500
+                                  sm:text-xs sm:leading-5
+                                  md:text-sm md:leading-6
+                                  lg:text-base
+                                  dark:text-slate-400">
+                            Search by skill, describe your task, and set the timing and
+                            budget that work for you.
                         </p>
                     </div>
-                    <div class="steps reveal">
-                        <article class="step">
-                            <span class="step-num">01</span>
-                            <div>
-                                <h3>Find</h3>
-                                <p>
-                                    Search by skill, describe your task, and set the timing and
-                                    budget that work for you.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">02</span>
-                            <div>
-                                <h3>Match</h3>
-                                <p>
-                                    Compare verified nearby providers by expertise, availability,
-                                    rating, and price.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">03</span>
-                            <div>
-                                <h3>Book</h3>
-                                <p>
-                                    Agree on the brief, keep communication in one place, and
-                                    confirm your booking.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">04</span>
-                            <div>
-                                <h3>Complete</h3>
-                                <p>
-                                    Check the delivered work against your brief and confirm
-                                    completion.
-                                </p>
-                            </div>
-                            <span>↗</span>
-                        </article>
-                        <article class="step">
-                            <span class="step-num">05</span>
-                            <div>
-                                <h3>Review</h3>
-                                <p>
-                                    Share your experience and help other students find trusted
-                                    campus talent.
-                                </p>
-                            </div>
-                            <span>&#8599;</span>
-                        </article>
+
+                    <span
+                        class="flex h-6 w-6 shrink-0 items-center justify-center
+                               text-sm text-slate-400
+                               transition-transform duration-300
+                               group-hover:-translate-y-0.5
+                               group-hover:translate-x-0.5
+                               sm:text-base
+                               md:text-lg"
+                    >
+                        ↗
+                    </span>
+                </article>
+
+
+                {{-- Step 02 --}}
+                <article
+                    class="group grid w-full min-w-0
+                           grid-cols-[32px_minmax(0,1fr)_20px]
+                           items-start gap-2.5
+                           rounded-xl border border-slate-200
+                           bg-white p-3
+                           transition-all duration-300
+                           hover:-translate-y-0.5
+                           hover:border-slate-300
+                           hover:shadow-md
+                           sm:grid-cols-[38px_minmax(0,1fr)_24px]
+                           sm:gap-3 sm:rounded-2xl sm:p-4
+                           md:grid-cols-[44px_minmax(0,1fr)_28px]
+                           md:gap-4 md:p-5
+                           lg:p-6
+                           dark:border-slate-800
+                           dark:bg-slate-900"
+                >
+
+                    <span
+                        class="flex h-7 w-7 shrink-0 items-center justify-center
+                               rounded-full bg-emerald-50
+                               text-[10px] font-bold text-emerald-700
+                               sm:h-8 sm:w-8 sm:text-xs
+                               md:h-10 md:w-10 md:text-sm
+                               dark:bg-emerald-950/50 dark:text-emerald-400"
+                    >
+                        02
+                    </span>
+
+                    <div class="min-w-0">
+                        <h3 class="text-sm font-semibold text-slate-900
+                                   sm:text-base md:text-lg
+                                   dark:text-white">
+                            Match
+                        </h3>
+
+                        <p class="mt-1 text-[11px] leading-5 text-slate-500
+                                  sm:text-xs sm:leading-5
+                                  md:text-sm md:leading-6
+                                  lg:text-base
+                                  dark:text-slate-400">
+                            Compare verified nearby providers by expertise, availability,
+                            rating, and price.
+                        </p>
                     </div>
-                </div>
-            </section>
+
+                    <span
+                        class="flex h-6 w-6 shrink-0 items-center justify-center
+                               text-sm text-slate-400
+                               transition-transform duration-300
+                               group-hover:-translate-y-0.5
+                               group-hover:translate-x-0.5
+                               sm:text-base md:text-lg"
+                    >
+                        ↗
+                    </span>
+                </article>
+
+
+                {{-- Step 03 --}}
+                <article
+                    class="group grid w-full min-w-0
+                           grid-cols-[32px_minmax(0,1fr)_20px]
+                           items-start gap-2.5
+                           rounded-xl border border-slate-200
+                           bg-white p-3
+                           transition-all duration-300
+                           hover:-translate-y-0.5
+                           hover:border-slate-300
+                           hover:shadow-md
+                           sm:grid-cols-[38px_minmax(0,1fr)_24px]
+                           sm:gap-3 sm:rounded-2xl sm:p-4
+                           md:grid-cols-[44px_minmax(0,1fr)_28px]
+                           md:gap-4 md:p-5
+                           lg:p-6
+                           dark:border-slate-800
+                           dark:bg-slate-900"
+                >
+
+                    <span
+                        class="flex h-7 w-7 shrink-0 items-center justify-center
+                               rounded-full bg-emerald-50
+                               text-[10px] font-bold text-emerald-700
+                               sm:h-8 sm:w-8 sm:text-xs
+                               md:h-10 md:w-10 md:text-sm
+                               dark:bg-emerald-950/50 dark:text-emerald-400"
+                    >
+                        03
+                    </span>
+
+                    <div class="min-w-0">
+                        <h3 class="text-sm font-semibold text-slate-900
+                                   sm:text-base md:text-lg
+                                   dark:text-white">
+                            Book
+                        </h3>
+
+                        <p class="mt-1 text-[11px] leading-5 text-slate-500
+                                  sm:text-xs sm:leading-5
+                                  md:text-sm md:leading-6
+                                  lg:text-base
+                                  dark:text-slate-400">
+                            Agree on the brief, keep communication in one place, and
+                            confirm your booking.
+                        </p>
+                    </div>
+
+                    <span
+                        class="flex h-6 w-6 shrink-0 items-center justify-center
+                               text-sm text-slate-400
+                               transition-transform duration-300
+                               group-hover:-translate-y-0.5
+                               group-hover:translate-x-0.5
+                               sm:text-base md:text-lg"
+                    >
+                        ↗
+                    </span>
+                </article>
+
+
+                {{-- Step 04 --}}
+                <article
+                    class="group grid w-full min-w-0
+                           grid-cols-[32px_minmax(0,1fr)_20px]
+                           items-start gap-2.5
+                           rounded-xl border border-slate-200
+                           bg-white p-3
+                           transition-all duration-300
+                           hover:-translate-y-0.5
+                           hover:border-slate-300
+                           hover:shadow-md
+                           sm:grid-cols-[38px_minmax(0,1fr)_24px]
+                           sm:gap-3 sm:rounded-2xl sm:p-4
+                           md:grid-cols-[44px_minmax(0,1fr)_28px]
+                           md:gap-4 md:p-5
+                           lg:p-6
+                           dark:border-slate-800
+                           dark:bg-slate-900"
+                >
+
+                    <span
+                        class="flex h-7 w-7 shrink-0 items-center justify-center
+                               rounded-full bg-emerald-50
+                               text-[10px] font-bold text-emerald-700
+                               sm:h-8 sm:w-8 sm:text-xs
+                               md:h-10 md:w-10 md:text-sm
+                               dark:bg-emerald-950/50 dark:text-emerald-400"
+                    >
+                        04
+                    </span>
+
+                    <div class="min-w-0">
+                        <h3 class="text-sm font-semibold text-slate-900
+                                   sm:text-base md:text-lg
+                                   dark:text-white">
+                            Complete
+                        </h3>
+
+                        <p class="mt-1 text-[11px] leading-5 text-slate-500
+                                  sm:text-xs sm:leading-5
+                                  md:text-sm md:leading-6
+                                  lg:text-base
+                                  dark:text-slate-400">
+                            Check the delivered work against your brief and confirm
+                            completion.
+                        </p>
+                    </div>
+
+                    <span
+                        class="flex h-6 w-6 shrink-0 items-center justify-center
+                               text-sm text-slate-400
+                               transition-transform duration-300
+                               group-hover:-translate-y-0.5
+                               group-hover:translate-x-0.5
+                               sm:text-base md:text-lg"
+                    >
+                        ↗
+                    </span>
+                </article>
+
+
+                {{-- Step 05 --}}
+                <article
+                    class="group grid w-full min-w-0
+                           grid-cols-[32px_minmax(0,1fr)_20px]
+                           items-start gap-2.5
+                           rounded-xl border border-slate-200
+                           bg-white p-3
+                           transition-all duration-300
+                           hover:-translate-y-0.5
+                           hover:border-slate-300
+                           hover:shadow-md
+                           sm:grid-cols-[38px_minmax(0,1fr)_24px]
+                           sm:gap-3 sm:rounded-2xl sm:p-4
+                           md:grid-cols-[44px_minmax(0,1fr)_28px]
+                           md:gap-4 md:p-5
+                           lg:p-6
+                           dark:border-slate-800
+                           dark:bg-slate-900"
+                >
+
+                    <span
+                        class="flex h-7 w-7 shrink-0 items-center justify-center
+                               rounded-full bg-emerald-50
+                               text-[10px] font-bold text-emerald-700
+                               sm:h-8 sm:w-8 sm:text-xs
+                               md:h-10 md:w-10 md:text-sm
+                               dark:bg-emerald-950/50 dark:text-emerald-400"
+                    >
+                        05
+                    </span>
+
+                    <div class="min-w-0">
+                        <h3 class="text-sm font-semibold text-slate-900
+                                   sm:text-base md:text-lg
+                                   dark:text-white">
+                            Review
+                        </h3>
+
+                        <p class="mt-1 text-[11px] leading-5 text-slate-500
+                                  sm:text-xs sm:leading-5
+                                  md:text-sm md:leading-6
+                                  lg:text-base
+                                  dark:text-slate-400">
+                            Share your experience and help other students find trusted
+                            campus talent.
+                        </p>
+                    </div>
+
+                    <span
+                        class="flex h-6 w-6 shrink-0 items-center justify-center
+                               text-sm text-slate-400
+                               transition-transform duration-300
+                               group-hover:-translate-y-0.5
+                               group-hover:translate-x-0.5
+                               sm:text-base md:text-lg"
+                    >
+                        ↗
+                    </span>
+                </article>
+
+            </div>
+        </div>
+    </div>
+</section>
             <section class="feature" id="talent">
                 <div class="feature-art">
                     <div class="orb one"></div>
@@ -337,8 +679,12 @@
                         offer, choose your hours, and grow through real work with people
                         around you.
                     </p>
-                    <a class="btn" href="{{ route('register') }}">Become a provider <span>↗</span></a>
-                </div>
+  <form action="{{ route('user.profile.register-provider') }}" method="POST" onsubmit="return confirm('Do you want to switch your account to Provider status?')">
+                        @csrf
+                        <button type="submit" class="btn">
+                            Register as Provider
+                        </button>
+                    </form>                </div>
             </section>
             <section class="cta">
                 <div class="shell reveal">
@@ -361,16 +707,7 @@
                     }),
                 { threshold: 0.12 },
             );
-            document
-                .querySelectorAll(".reveal")
-                .forEach((el) => observer.observe(el));
-            document.getElementById("heroSearch").addEventListener("submit", (e) => {
-                e.preventDefault();
-                const q = document.getElementById("searchInput").value.trim();
-                location.href = q
-                    ? "explore.html?q=" + encodeURIComponent(q)
-                    : "explore.html";
-            });
+
             const menu = document.querySelector(".menu"),
                 links = document.querySelector(".nav-links");
             menu.addEventListener("click", () => {

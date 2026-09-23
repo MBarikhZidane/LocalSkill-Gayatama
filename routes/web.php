@@ -34,11 +34,23 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/services/{id}', [LandingController::class, 'show'])->name('services.show');
-Route::get('/myorders', [LandingController::class, 'index'])->name('myorders.index');
-Route::patch('/myorders/{order}/cancel', [LandingController::class, 'cancel'])->name('myorders.cancel');
-Route::get('/profile/{id}', [LandingController::class, 'viewprofile'])->name('profile.viewprofile');
+Route::prefix('user')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/services/{id}', [LandingController::class, 'show'])
+            ->whereNumber('id')
+            ->name('services.show');
 
+        Route::get('/myorders', [LandingController::class, 'index'])
+            ->name('myorders.index');
+
+        Route::patch('/myorders/{order}/cancel', [LandingController::class, 'cancel'])
+            ->name('myorders.cancel');
+
+        Route::get('/profile/{id}', [LandingController::class, 'viewprofile'])
+            ->name('profile.viewprofile');
+    });
+    
 Route::prefix('user')
     ->middleware('auth')
     ->name('user.')
@@ -48,11 +60,11 @@ Route::prefix('user')
         Route::post('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
         Route::get('/dashboard', [DashboardController::class, 'dashboarduser'])->name('dashboarduser');
 
-        Route::resource('services', ServiceuserController::class)
-            ->except(['show']);
-        // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::delete('/user/services/bulk-delete', [ServiceuserController::class, 'destroyBulk'])
-            ->name('services.destroy-bulk');
+        Route::delete('/services/bulk-delete', [ServiceuserController::class, 'destroyBulk'])
+    ->name('services.destroy-bulk');
+
+Route::resource('services', ServiceuserController::class)
+    ->except(['show']);
 
         Route::delete('/orders/bulk-delete', [OrderuserController::class, 'destroyBulk'])
             ->name('orders.destroy-bulk');
