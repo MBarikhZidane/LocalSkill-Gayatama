@@ -45,7 +45,7 @@ class ServiceuserController extends Controller
         $validated = $request->validate([
             'category_id'    => 'required|exists:skill_categories,id',
             'title'          => 'required|string|max:255',
-            'description'    => 'nullable|string',
+            'description'    => 'required|string',
             'price'          => 'required|numeric|min:0',
             'estimated_days' => 'required|integer|min:1',
             'status'         => 'required|in:active,inactive',
