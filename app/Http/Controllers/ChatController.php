@@ -1,115 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Conservation;
-use App\Models\Message;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
+use App\Models\Conservation;
+use App\Models\Order;
+use App\Services\OrderWorkflow;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    public function index()
+    public function index(Request $request): View
     {
-        return view('users.messages');
-    }
-    public function getConversations()
-    {
-        $userId = Auth::id();
+        $orders = Order::with(['service'])->where(fn ($q) => $q->where('customer_id', $request->user()->id)->orWhere('provider_id', $request->user()->id))->latest('id')->paginate(20);
 
-        $conversations = Conservation::whereHas('participants', function ($query) use ($userId) {
-            $query->where('user_id', $userId);
-        })
-        ->with(['order.service', 'order.customer', 'order.provider', 'latestMessage', 'participants'])
-        ->get()
-        ->map(function ($conversation) use ($userId) {
-            $order = $conversation->order;
-            
-            $isCustomer = $order ? ($order->customer_id === $userId) : false;
-            
-            $otherUser = $isCustomer ? $order->provider : $order->customer;
-
-            return [
-                'id' => $conversation->id,
-                'role_label' => $isCustomer ? 'Provider' : 'Customer',
-                'other_user_name' => $otherUser ? $otherUser->name : 'User',
-                'service_title' => $order->service->title ?? 'Layanan',
-                'service_url' => $order->service_id ? route('services.show', $order->service_id) : '#',
-                'order_number' => $order->order_number ?? '-',
-                'last_message' => $conversation->latestMessage->message ?? 'Belum ada pesan',
-                'last_message_time' => $conversation->latestMessage ? $conversation->latestMessage->created_at->diffForHumans() : '',
-            ];
-        });
-
-        return response()->json($conversations);
+        return view('users.orders.workflow.inbox', compact('orders'));
     }
 
-    public function getMessages($id)
+    public function getConversations(Request $request): JsonResponse
     {
-        $userId = Auth::id();
+        $orders = Order::where(fn ($q) => $q->where('customer_id', $request->user()->id)->orWhere('provider_id', $request->user()->id))->latest('id')->paginate(20);
 
-        $conversation = Conservation::whereHas('participants', function ($q) use ($userId) {
-            $q->where('user_id', $userId);
-        })
-        ->with(['order.service', 'order.customer', 'order.provider', 'messages.sender'])
-        ->findOrFail($id);
-
-        $order = $conversation->order;
-        $isCustomer = $order ? ($order->customer_id === $userId) : false;
-        $otherUser = $isCustomer ? $order->provider : $order->customer;
-
-        $messages = $conversation->messages->map(function ($msg) use ($userId) {
-            return [
-                'id' => $msg->id,
-                'sender_id' => $msg->sender_id,
-                'sender_name' => $msg->sender->name,
-                'is_me' => $msg->sender_id === $userId,
-                'message' => $msg->message,
-                'time' => $msg->created_at->format('H:i | d M Y'),
-            ];
-        });
-
-        return response()->json([
-            'conversation' => [
-                'id' => $conversation->id,
-                'role_label' => $isCustomer ? 'Provider' : 'Customer',
-                'other_user_name' => $otherUser ? $otherUser->name : 'User',
-                'order_number' => $order->order_number ?? '-',
-                'service_title' => $order->service->title ?? 'Layanan',
-                'service_url' => $order->service_id ? route('services.show', $order->service_id) : '#',
-            ],
-            'messages' => $messages,
-        ]);
+        return response()->json($orders->through(fn ($o) => ['order_id' => $o->id, 'url' => route('user.workflow.show', $o)]));
     }
 
-    public function sendMessage(Request $request, $id)
+    public function getMessages(Request $request, int $id, OrderWorkflowController $controller): JsonResponse
     {
-        $request->validate([
-            'message' => 'required|string|max:1000',
-        ]);
+        $conversation = Conservation::findOrFail($id);
+        abort_unless($conversation->order, 404);
 
-        $userId = Auth::id();
+        return $controller->history($request, $conversation->order);
+    }
 
-        $conversation = Conservation::whereHas('participants', function ($q) use ($userId) {
-            $q->where('user_id', $userId);
-        })->findOrFail($id);
+    public function sendMessage(Request $request, int $id, OrderWorkflowController $controller, OrderWorkflow $workflow): mixed
+    {
+        $conversation = Conservation::findOrFail($id);
+        abort_unless($conversation->order, 404);
+        $request->merge(['body' => $request->input('body', $request->input('message'))]);
 
-        $message = Message::create([
-            'conservation_id' => $conversation->id,
-            'sender_id' => $userId,
-            'message' => $request->message,
-        ]);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => [
-                'id' => $message->id,
-                'sender_id' => $message->sender_id,
-                'sender_name' => Auth::user()->name,
-                'is_me' => true,
-                'message' => $message->message,
-                'time' => $message->created_at->format('H:i | d M Y'),
-            ],
-        ]);
+        return $controller->write($request, $conversation->order, 'message', $workflow);
     }
 }

@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Service;
-use App\Models\StudyProgram;
 use App\Models\University;
 use App\Models\User;
 use App\Notifications\OrderStatusChanged;
+use App\Services\OrderWorkflow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class LandingController extends Controller
 {
@@ -22,7 +21,7 @@ class LandingController extends Controller
             'user.skills',
             'user.portofolios.skill',
             'category',
-            'reviews.reviewer'
+            'reviews.reviewer',
         ])->findOrFail($id);
 
         $avgRating = $service->reviews->avg('rating') ?? 0;
@@ -43,7 +42,7 @@ class LandingController extends Controller
                     ->where('reviewer_id', Auth::id())
                     ->exists();
 
-                $canReview = !$alreadyReviewed;
+                $canReview = ! $alreadyReviewed;
             }
         }
 
@@ -61,7 +60,7 @@ class LandingController extends Controller
         $order = Order::findOrFail($request->order_id);
 
         // Ganti buyer_id menjadi customer_id
-        if ($order->customer_id !== Auth::id() || $order->service_id !== $service->id) {
+        if ($order->customer_id !== Auth::id() || $order->service_id !== $service->id || $order->status !== 'completed') {
             return back()->with('error', 'Anda tidak memiliki akses untuk memberikan ulasan pada pesanan ini.');
         }
 
@@ -83,7 +82,7 @@ class LandingController extends Controller
         $status = $request->input('status', 'all');
         $search = $request->input('search');
 
-        $query = Order::with(['service', 'provider', 'customer', 'serviceRequest']);
+        $query = Order::with(['service', 'provider', 'customer']);
 
         if ($view === 'selling') {
             $query->where('provider_id', $user->id);
@@ -119,25 +118,9 @@ class LandingController extends Controller
         return view('users.my-orders', compact('orders', 'view', 'status', 'search'));
     }
 
-    public function cancel(Order $order)
+    public function cancel(Order $order, OrderWorkflow $workflow)
     {
-        // Pastikan order milik user yang sedang login dan statusnya 'pending'
-        if ($order->customer_id !== Auth::id()) {
-            return back()->with('error', 'Anda tidak memiliki akses untuk membatalkan pesanan ini.');
-        }
-
-        if ($order->status !== 'pending') {
-            return back()->with('error', 'Pesanan hanya dapat dibatalkan jika statusnya masih Pending.');
-        }
-
-        $order->update([
-            'status' => 'cancelled'
-        ]);
-
-        // 🔔 KIRIM NOTIFIKASI KE PROVIDER
-        if ($order->provider) {
-            $order->provider->notify(new OrderStatusChanged($order, 'cancelled'));
-        }
+        $workflow->write($order, (int) Auth::id(), 'cancel', []);
 
         return back()->with('success', 'Pesanan berhasil dibatalkan.');
     }
@@ -150,7 +133,7 @@ class LandingController extends Controller
             'skills',
             'portofolios.skill',
             'services.category',
-            'location'
+            'location',
         ])->findOrFail($id);
 
         $providerOrderIds = Order::where('provider_id', $user->id)->pluck('id');
@@ -192,7 +175,7 @@ class LandingController extends Controller
         $totalAmount = $price + $platformFee;
 
         $order = Order::create([
-            'order_number' => 'ORD-' . strtoupper(Str::random(8)),
+            'order_number' => 'ORD-'.strtoupper(Str::random(8)),
             'customer_id' => Auth::id(),
             'provider_id' => $service->user_id,
             'service_id' => $service->id,
@@ -227,10 +210,10 @@ class LandingController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'name'             => ['required', 'string', 'max:255'],
-            'email'            => ['required', 'string', 'email', 'max:255'],
-            'phone'            => ['nullable', 'string', 'max:20'],
-            'bio'              => ['nullable', 'string', 'max:1000'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'bio' => ['nullable', 'string', 'max:1000'],
         ]);
 
         $user->update($request->only([

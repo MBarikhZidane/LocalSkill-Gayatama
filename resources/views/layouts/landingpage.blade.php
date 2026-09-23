@@ -1380,6 +1380,7 @@
 
                             {{-- Item Menu --}}
                             <li class="mt-1">
+                                <a href="{{ route('user.chat.index') }}" class="block px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">Order Messages <span data-workflow-total class="badge badge-sm" hidden></span></a>
                                 <a href="{{ route('myorders.index') }}"
                                     class="py-2 hover:bg-slate-100 dark:hover:bg-slate-700">
                                     <i data-lucide="shopping-bag" class="w-4 h-4 text-emerald-600"></i>
@@ -1483,6 +1484,9 @@
     </script>
 
 
+@auth
+@include('users.orders.workflow.assets')
+@endauth
 </body>
 
 </html>

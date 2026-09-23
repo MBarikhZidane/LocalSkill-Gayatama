@@ -13,6 +13,8 @@ class Order extends Model
 
     protected $fillable = [
         'order_number',
+        'brief',
+        'scheduled_date',
         'customer_id',
         'provider_id',
         'service_id',
@@ -23,6 +25,11 @@ class Order extends Model
         'started_at',
         'completed_at',
     ];
+
+    public static function statusLabel(string $status): string
+    {
+        return $status === 'submitted' ? 'Awaiting Confirmation' : ucwords(str_replace('_', ' ', $status));
+    }
 
     public function customer(): BelongsTo
     {

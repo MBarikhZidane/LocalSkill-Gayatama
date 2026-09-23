@@ -119,23 +119,8 @@
                                     Rp {{ number_format($order->price, 0, ',', '.') }}
                                 </td>
                                 <td class="p-4 text-center">
-                                    @if($order->status === 'completed')
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
-                                            Completed
-                                        </span>
-                                    @elseif($order->status === 'pending')
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300">
-                                            Pending
-                                        </span>
-                                    @elseif($order->status === 'cancelled')
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300">
-                                            Cancelled
-                                        </span>
-                                    @else
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">
-                                            {{ ucfirst($order->status) }}
-                                        </span>
-                                    @endif
+                                    <p class="mb-2" data-order-status="{{ $order->id }}">{{ \App\Models\Order::statusLabel($order->status) }}</p>
+                                    @include('users.orders.workflow.actions', ['order' => $order])
                                 </td>
                             </tr>
                         @empty
@@ -150,4 +135,5 @@
             </div>
         </div>
     </div>
+@include('users.orders.workflow.assets')
 @endsection

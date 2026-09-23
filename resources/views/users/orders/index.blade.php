@@ -149,23 +149,11 @@
                                         @elseif($order->status === 'cancelled') bg-rose-100 text-rose-800 dark:bg-rose-950/50 dark:text-rose-300
                                         @else bg-amber-100 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300
                                         @endif">
-                                        {{ str_replace('_', ' ', $order->status) }}
+                                        <span data-order-status="{{ $order->id }}">{{ \App\Models\Order::statusLabel($order->status) }}</span>
                                     </span>
                                 </td>
                                 <td class="p-4 flex items-center justify-center gap-2">
-                                    <a href="{{ route('user.orders.edit', $order->id) }}"
-                                        class="btn btn-ghost btn-xs text-slate-600 hover:text-emerald-600 dark:text-slate-400">
-                                        <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-                                    </a>
-                                    <form action="{{ route('user.orders.destroy', $order->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this order?');" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="btn btn-ghost btn-xs text-rose-600 hover:text-rose-700 dark:text-rose-400">
-                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                        </button>
-                                    </form>
+                                    @include('users.orders.workflow.actions', ['order' => $order])
                                 </td>
                             </tr>
                         @empty
@@ -191,4 +179,5 @@
             @endif
         </div>
     </div>
+@include('users.orders.workflow.assets')
 @endsection

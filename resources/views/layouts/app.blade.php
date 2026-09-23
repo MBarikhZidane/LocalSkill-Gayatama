@@ -303,6 +303,9 @@
         });
     </script>
 
+@auth
+@include('users.orders.workflow.assets')
+@endauth
 </body>
 
 </html>

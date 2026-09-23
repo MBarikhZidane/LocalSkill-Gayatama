@@ -62,7 +62,9 @@
                         <option value="pending" {{ $status === 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="accepted" {{ $status === 'accepted' ? 'selected' : '' }}>Accepted</option>
                         <option value="in_progress" {{ $status === 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                        <option value="submitted" {{ $status === 'submitted' ? 'selected' : '' }}>Submitted</option>
+                        <option value="submitted" {{ $status === 'submitted' ? 'selected' : '' }}>Awaiting Confirmation</option>
+                        <option value="issue_reported" {{ $status === 'issue_reported' ? 'selected' : '' }}>Issue Reported</option>
+                        <option value="declined" {{ $status === 'declined' ? 'selected' : '' }}>Declined</option>
                         <option value="completed" {{ $status === 'completed' ? 'selected' : '' }}>Completed</option>
                         <option value="cancelled" {{ $status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         <option value="disputed" {{ $status === 'disputed' ? 'selected' : '' }}>Disputed</option>
@@ -109,7 +111,7 @@
                                     ][$order->status] ?? 'bg-slate-100 text-slate-800';
                                 @endphp
                                 <span class="rounded-full px-2.5 py-0.5 text-xs font-medium capitalize {{ $badgeClasses }}">
-                                    {{ str_replace('_', ' ', $order->status) }}
+                                    <span data-order-status="{{ $order->id }}">{{ \App\Models\Order::statusLabel($order->status) }}</span>
                                 </span>
                             </div>
 
@@ -146,19 +148,8 @@
                                     </form>
                                 @endif
 
-                                @php
-    $phone = preg_replace('/^0/', '62', $order->provider->phone ?? '');
+                                @include('users.orders.workflow.actions', ['order' => $order])
 
-    // Pesan otomatis
-    $message = "Halo " . ($order->provider->name ?? '') . ", saya ingin bertanya terkait pesanan #" . $order->order_number;
-@endphp
-
-<a href="https://wa.me/{{ $phone }}?text={{ urlencode($message) }}"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="btn btn-outline btn-sm dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700">
-    Chat WhatsApp
-</a>
                             </div>
                         </div>
 
@@ -188,4 +179,5 @@
     @endif
 
 </main>
+@include('users.orders.workflow.assets')
 @endsection

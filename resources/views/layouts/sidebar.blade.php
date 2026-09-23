@@ -172,4 +172,5 @@
             {{ __('My Portofolio') }}
         </x-nav-link>
     @endif
+    <a href="{{ route('user.chat.index') }}" @click="sidebarOpen = false" class="block rounded px-4 py-2.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Order Messages <span data-workflow-total class="badge badge-sm" hidden></span></a>
 </nav>

@@ -115,7 +115,7 @@
                         @endif
 
                         @if(isset($data['order_id']))
-                            <a href="{{ route('myorders.index') }}" class="btn btn-outline btn-xs dark:border-slate-600 dark:text-slate-300">
+                            <a href="{{ route('user.workflow.show', $data['order_id']) }}" class="btn btn-outline btn-xs dark:border-slate-600 dark:text-slate-300">
                                 View Order
                             </a>
                         @endif
