@@ -1,58 +1,249 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LocalSkill
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+LocalSkill is a Laravel application for finding student services and managing service listings.
 
-## About Laravel
+## Local Installation Guide
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+These instructions use **Windows PowerShell** and a **local MySQL database**. Run commands one at a time. The application files shared with this guide do not establish exact PHP or Node.js version requirements; use the versions required by `composer.json`, `composer.lock`, and `package.json` in your checkout.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Install the prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Install the following tools and make sure they are available in your terminal:
 
-## Learning Laravel
+- [Git](https://git-scm.com/downloads)
+- [PHP](https://www.php.net/downloads.php), compatible with the project's Composer requirements
+- [Composer](https://getcomposer.org/download/)
+- [Node.js and npm](https://nodejs.org/), compatible with the project's frontend dependencies
+- MySQL, either installed separately or supplied by a local environment such as Laragon or XAMPP
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Verify the installations:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```powershell
+git --version
+php -v
+composer --version
+node -v
+npm -v
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+If a command is not recognized, install the tool or correct its PATH entry, then reopen PowerShell.
 
-## Contributing
+### 2. Clone the main branch
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Open PowerShell in the parent folder where you want to store the project:
 
-## Code of Conduct
+```powershell
+git clone --branch main https://github.com/MBarikhZidane/LocalSkill-Gayatama.git
+cd LocalSkill-Gayatama
+git branch --show-current
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The last command should print `main`. Private repositories require GitHub access. Use the repository URL above, not a browser URL ending in `/tree/main`.
 
-## Security Vulnerabilities
+Check the project files:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```powershell
+dir
+```
 
-## License
+Run the remaining commands from the directory containing `artisan`, `composer.json`, and `package.json`. If these files are inside a subfolder, enter that folder first.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Enable the required PHP extensions
+
+Find the configuration used by command-line PHP:
+
+```powershell
+php --ini
+```
+
+Open the file shown under **Loaded Configuration File**. For example, if it is `C:\php_all\php.ini`:
+
+```powershell
+notepad C:\php_all\php.ini
+```
+
+For this setup, ensure the following extensions are enabled. Remove a leading semicolon from an existing entry instead of adding duplicate entries:
+
+```ini
+extension=fileinfo
+extension=zip
+extension=pdo_mysql
+```
+
+These are the extensions relevant to the known installation errors and the MySQL setup, not an exhaustive list of Laravel's requirements. Enable any additional extensions requested by Composer.
+
+Save the file and verify:
+
+```powershell
+php -m | Select-String 'fileinfo|zip|pdo_mysql'
+```
+
+Each new PHP CLI command reads the configuration again. If PHP reports an extension loading error, check `extension_dir` and whether the corresponding DLL exists in the PHP installation's `ext` directory.
+
+### 4. Install PHP dependencies
+
+```powershell
+composer install
+```
+
+This installs the versions recorded in `composer.lock`. Do not use `composer update` or ignore platform requirements to work around missing PHP extensions.
+
+If installation fails, fix the reported problem and rerun `composer install` before continuing.
+
+### 5. Create the local environment file
+
+Create `.env` only if it does not already exist:
+
+```powershell
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
+```
+
+If `.env.example` is missing, obtain the project's environment template from the maintainer. Do not copy production credentials into a local installation.
+
+For a new local installation, generate the application key:
+
+```powershell
+php artisan key:generate
+```
+
+Generate this key once during setup; do not regenerate it every time you start the application.
+
+### 6. Configure a local MySQL database
+
+Start MySQL and create an empty database named `localskill` using phpMyAdmin, a database client, or the following SQL in a MySQL session:
+
+```sql
+CREATE DATABASE localskill CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Open `.env`:
+
+```powershell
+notepad .env
+```
+
+Update the existing entries to match your local setup:
+
+```dotenv
+APP_NAME=LocalSkill
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=localskill
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+The example assumes a local `root` account with no password. Replace the username, password, and port with your own values. Keep the other project-specific settings from `.env.example`. `APP_DEBUG=true` is for local development only.
+
+Clear cached configuration and create the tables:
+
+```powershell
+php artisan config:clear
+php artisan migrate
+```
+
+Migrations create the schema; they do not copy production data or uploaded files. If the application requires initial categories or other reference data, review `database/seeders` and the maintainer's instructions. Only if the project's seeders are intended for local setup, run:
+
+```powershell
+php artisan db:seed
+```
+
+This guide does not assume that seeders or default login credentials exist.
+
+### 7. Install frontend dependencies
+
+If the project includes `package-lock.json`, use:
+
+```powershell
+npm ci
+```
+
+If it does not include an npm lockfile and npm is the project's package manager, use:
+
+```powershell
+npm install
+```
+
+If the project uses another package manager's lockfile, follow that package manager instead. If `npm ci` reports a mismatch between the manifest and lockfile, resolve that mismatch with the maintainer.
+
+### 8. Link public storage
+
+```powershell
+php artisan storage:link
+```
+
+This exposes files stored in `storage/app/public` through `public/storage`. A message saying the link already exists normally means this step has already been completed. On Windows, a symbolic-link permission error may require Developer Mode or an elevated terminal.
+
+### 9. Start Laravel and the frontend
+
+In the first terminal, from the project directory:
+
+```powershell
+php artisan serve
+```
+
+Open a second PowerShell terminal, enter the same project directory, and run:
+
+```powershell
+npm run dev
+```
+
+Keep both terminals open. These frontend commands assume a `dev` script is defined in `package.json`; run `npm run` to inspect the available scripts if it is missing.
+
+Open **http://127.0.0.1:8000** in your browser. Use the Laravel URL, not the Vite development-server URL, to access the application.
+
+If you only need compiled assets and the project provides a `build` script, you can run `npm run build` instead of keeping Vite running. Rebuild after changing frontend assets.
+
+Some features may require additional services, such as mail delivery, a queue worker, or broadcasting. Configure those according to the project's environment template. If the application uses an asynchronous queue for a feature, run `php artisan queue:work` in a separate terminal for that feature.
+
+### 10. Start the application on later visits
+
+Start your local MySQL service, then run these commands in separate terminals from the project directory:
+
+```powershell
+php artisan serve
+```
+
+```powershell
+npm run dev
+```
+
+You do not need to clone again, recreate `.env`, regenerate the key, or reinstall unchanged dependencies. Stop a development server with **Ctrl + C** in its terminal.
+
+## Troubleshooting
+
+| Error | What to check |
+| --- | --- |
+| `ext-fileinfo` is missing | Enable `extension=fileinfo` in the CLI PHP configuration, then rerun Composer. |
+| ZIP extension and unzip/7z commands are missing | Enable `extension=zip`, verify it with `php -m`, then rerun Composer. |
+| `Could not open input file: artisan` | Enter the project directory containing the `artisan` file. |
+| `vendor/autoload.php` is missing | Complete `composer install` successfully. |
+| `No application encryption key has been specified` | Ensure `.env` exists, generate a key for the new local installation, then run `php artisan config:clear`. |
+| `could not find driver` with MySQL | Enable `pdo_mysql` in the PHP configuration used by the terminal. |
+| Database connection refused | Start MySQL and verify the host and port in `.env`. |
+| Access denied or unknown database | Check the local credentials and create the configured database. Run `php artisan config:clear` after editing `.env`. |
+| `Vite manifest not found` | Install frontend dependencies and run `npm run dev`, or run the project's build script. |
+| `npm.ps1 cannot be loaded` | Try `npm.cmd` in place of `npm`, such as `npm.cmd ci` and `npm.cmd run dev`. |
+| Port 8000 is occupied | Run `php artisan serve --port=8001` and open `http://127.0.0.1:8001`. Adjust `APP_URL` if needed. |
+| A page returns 404 | Inspect `php artisan route:list`, check route order and parameter constraints, and clear stale routes with `php artisan route:clear`. |
+
+For application errors, inspect the terminal output and files under `storage/logs`. Remove credentials and other sensitive values before sharing logs.
+
+## Configuration and Credentials
+
+- Keep `.env`, `vendor`, and `node_modules` out of Git; verify the project's `.gitignore`.
+- Keep dependency lockfiles in version control so installations use consistent versions.
+- Use local database credentials and local test data.
+- Cloning and running this project does not update the hosted website.
+
+## Documentation
+
+- [Laravel documentation](https://laravel.com/docs) — select the version matching `composer.json`.
+- [Composer: installing dependencies](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies)
+- [PHP configuration](https://www.php.net/manual/en/configuration.file.php)
+
